@@ -3,6 +3,7 @@ package com.xgy.bookmall;
 import com.xgy.bookmall.entity.User;
 import com.xgy.bookmall.mapper.UserMapper;
 
+import com.xgy.bookmall.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.runner.RunWith;
 import org.junit.Assert;
@@ -22,12 +23,12 @@ import java.util.List;
 public class ApplicationTests {
 
     @Autowired
-    private UserMapper userMapper;
+    private UserService userService;
 
     @Test
     @Rollback
     public void test() throws Exception {
-        List<User> users = userMapper.findUsersByName("lhh");
+        List<User> users = userService.findUsersByName("lhh");
         for (User user: users) {
             System.out.println(user.getUId());
         }
