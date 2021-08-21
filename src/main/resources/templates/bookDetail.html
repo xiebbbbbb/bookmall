@@ -3,14 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <title></title>
-    <link href="../static/css/bootstrap.css" rel="stylesheet">
-    <link rel="stylesheet" href="../static/css/index.css"/>
-    <link rel="stylesheet" href="../static/css/product.css"/>
-    <link rel="stylesheet" href="../static/css/font-awesome.css"/>
-    <script src="../static/js/jquery.min.js"></script>
-    <script src="../static/js/popper.min.js"></script>
-    <script src="../static/js/bootstrap.min.js"></script>
-
+    <link href="./css/bootstrap.css" rel="stylesheet">
+    <link rel="stylesheet" href="./css/index.css"/>
+    <link rel="stylesheet" href="./css/product.css"/>
+    <link rel="stylesheet" href="./css/font-awesome.css"/>
+    <script src="./js/jquery.min.js"></script>
+    <script src="./js/popper.min.js"></script>
+    <script src="./js/bootstrap.min.js"></script>
     <style type="text/css">
         * {
             padding: 0;
@@ -113,7 +112,7 @@
                     let book = data.result[0];
                     console.log(book);
                     console.log(book.bUri);
-                    let content = '<div class="mr-1"><img alt="" src="../static/img"/></div>';
+                    let content = '<div class="mr-1"><img alt="" src="./img"/></div>';
                     content += '<div class="d-flex flex-column justify-content-around pl-5 pr-5 ">\n' +
                         '        <!--书名-->\n' +
                         '        <div class="h4 text-center"><span id="bName" >'+book.bName+'</span></div>\n' +
@@ -139,7 +138,7 @@
 <!-- 顶部悬停栏 -->
 <div class="container container-bg">
     <nav class="navbar navbar-expand bg-navbar sticky-top">
-        <a href="./index.html"><img src="../static/img/logo.png" alt=""/></a>
+        <a href="./index.html"><img src="./img/logo.png" alt=""/></a>
         <div class="collapse navbar-collapse justify-content-end">
             <ul class="navbar-nav" id="navbarT">
                 <li class="nav-item">
