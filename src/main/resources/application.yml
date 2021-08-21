@@ -1,0 +1,23 @@
+server:
+  port: 8765
+
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/bookdb     # 最后一项是数据库名字
+    username: lhh
+    password:
+    driver-class-name: com.mysql.cj.jdbc.Driver # 这是mysql8.0版本, 如果是旧版mysql, 试试 com.mysql.jdbc.Driver
+
+  thymeleaf:
+    cache: true
+    check-template-location: true
+    content-type: text/html
+    encoding: UTF-8
+    excluded-view-names:
+    mode: HTML5
+    prefix: classpath:/templates/
+    suffix: .html
+    template-resolver-order:
+
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
