@@ -14,18 +14,31 @@ public class UserServiceImpl implements UserService {
     @Autowired
     UserMapper userMapper;
 
+
+//    @Override
+//    public User findUserById(int uId) {
+//        return userMapper.findUserById(uId);
+//    }
+//
+//    @Override
+//    public List<User> findUsersByName(String uName) {
+//        return userMapper.findUsersByName(uName);
+//    }
+//
+//    @Override
+//    public int insert(String uName, String uPwd, String uPhone) {
+//        return userMapper.insert(uName, uPwd, uPhone);
+//    }
+
     @Override
-    public User findUserById(int uId) {
-        return userMapper.findUserById(uId);
+    public int insert(User user) {
+        int res = userMapper.insert(user);
+        System.out.println("res = " + res);
+        return res;
     }
 
     @Override
-    public List<User> findUsersByName(String uName) {
-        return userMapper.findUsersByName(uName);
-    }
-
-    @Override
-    public int insert(String uName, String uPwd, String uPhone) {
-        return userMapper.insert(uName, uPwd, uPhone);
+    public List<User> selectByNameAndPwd(String uName, String uPwd) {
+        return userMapper.selectByNameAndPwd(uName, uPwd);
     }
 }

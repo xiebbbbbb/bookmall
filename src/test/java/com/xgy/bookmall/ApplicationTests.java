@@ -28,10 +28,10 @@ public class ApplicationTests {
     @Test
     @Rollback
     public void test() throws Exception {
-        List<User> users = userService.findUsersByName("lhh");
-        for (User user: users) {
-            System.out.println(user.getUId());
-        }
+//        List<User> users = userService.findUsersByName("lhh");
+//        for (User user: users) {
+//            System.out.println(user.getUId());
+//        }
     }
 
 }

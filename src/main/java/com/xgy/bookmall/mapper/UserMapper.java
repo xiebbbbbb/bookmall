@@ -7,10 +7,12 @@ import java.util.List;
 
 public interface UserMapper {
 
-    User findUserById(@Param("uId") int uId);
+//    User findUserById(@Param("uId") int uId);
+//
+//    List<User> findUsersByName(@Param("uName") String uName);
+//
+//    int insert(@Param("uName") String uName, @Param("uPwd") String uPwd, @Param("uPhone") String uPhone);
 
-    List<User> findUsersByName(@Param("uName") String uName);
-
-    int insert(@Param("uName") String uName, @Param("uPwd") String uPwd, @Param("uPhone") String uPhone);
-
+    int insert(@Param("user") User user);
+    List<User> selectByNameAndPwd(@Param("uName") String uName, @Param("uPwd") String uPwd);
 }
