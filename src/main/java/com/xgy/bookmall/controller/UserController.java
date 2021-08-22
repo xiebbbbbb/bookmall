@@ -44,6 +44,7 @@ public class UserController {
             return ret;
         }
         // TODO: do sql
+        //uid没用到
         userService.insert(new User(0, uName, uPwd, uPhone));
         ret.put("code", 200);
         ret.put("msg", "reg success");

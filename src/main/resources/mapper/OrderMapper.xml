@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<!--
+    https://mybatis.org/mybatis-3/zh/sqlmap-xml.html
+    参考链接
+-->
+<!--namespace是Mapper类的路径-->
+<mapper namespace="com.xgy.bookmall.mapper.OrderMapper">
+
+    <!--
+    <select id="和Mapper类中的方法名对应" resultType="类路径">
+        SQL语句
+        通过#{arg}来设置属性，和Mapper类中的方法的参数对应
+    </select>
+    -->
+
+    <!--    <select id="findUserById" resultType="com.xgy.bookmall.entity.User">-->
+    <!--        SELECT * FROM users WHERE uId = #{uId}-->
+    <!--    </select>-->
+
+    <!--    &lt;!&ndash;所有的结果都是 List 形式返回，我们需要指定的是返回内容的具体类型。&ndash;&gt;-->
+    <!--    &lt;!&ndash;resultType是sql映射文件中定义返回值类型，返回值有基本类型，对象类型，List类型，Map类型等。&ndash;&gt;-->
+    <!--    <select id="findUsersByName" resultType="com.xgy.bookmall.entity.User">-->
+    <!--        SELECT * FROM users WHERE uName = #{uName}-->
+    <!--    </select>-->
+
+    <!--    <insert id="insert">-->
+    <!--        INSERT INTO users(uName, uPwd, uPhone) VALUES(#{uName}, #{uPwd}, #{uPhone})-->
+    <!--    </insert>-->
+    <insert id="insert">
+        INSERT INTO orders(uId, oTotalPrice, oAddress, oState) VALUES(#{order.uId}, #{order.oTotalPrice}
+        ,#{order.oAddress}, #{order.oState})
+    </insert>
+
+
+    <select id="findAll" resultType="com.xgy.bookmall.entity.Order">
+        SELECT * FROM orders WHERE uId = #{order.uId}
+    </select>
+
+    <select id="getoId" resultType="int">
+        SELECT LAST_INSERT_ID();
+    </select>
+
+    <select id="find" resultType="com.xgy.bookmall.entity.Order">
+        SELECT * FROM orders WHERE oId = #{order.oId}
+    </select>
+
+    <update id="receive">
+        UPDATE orders SET oState='已完成' WHERE oId = #{order.oId}
+    </update>
+
+    <delete id="delete">
+        delete from orders where oId = #{order.oId}
+    </delete>
+
+
+
+
+</mapper>
