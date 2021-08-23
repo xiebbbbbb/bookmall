@@ -1,6 +1,7 @@
 package com.xgy.bookmall.service.impl;
 
 import com.xgy.bookmall.entity.OrderBook;
+import com.xgy.bookmall.mapper.OrderBookMapper;
 import com.xgy.bookmall.mapper.OrderMapper;
 import com.xgy.bookmall.service.OrderBookService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,22 +13,23 @@ import java.util.List;
 public class OrderBookServiceImpl implements OrderBookService {
 
     @Autowired
-    OrderBookService orderBookService;
+    OrderBookMapper orderBookMapper;
 
     @Override
     public int insert(OrderBook orderBook) {
-        int res = orderBookService.insert(orderBook);
+        int res = orderBookMapper.insert(orderBook);
         System.out.println("res = " + res);
         return res;
     }
 
     @Override
     public int delete(int oId) {
-        return orderBookService.delete(oId);
+        System.out.println("oId = " + oId);
+        return orderBookMapper.delete(oId);
     }
 
     @Override
     public List<OrderBook> find(int oId) {
-        return orderBookService.find(oId);
+        return orderBookMapper.find(oId);
     }
 }

@@ -2,11 +2,23 @@ server:
   port: 8080
 
 spring:
+  # mysql
   datasource:
     url: jdbc:mysql://localhost:3306/bookdb     # 最后一项是数据库名字
     username: root
-    password: 12345678
+    password: 112389
     driver-class-name: com.mysql.cj.jdbc.Driver # 这是mysql8.0版本, 如果是旧版mysql, 试试 com.mysql.jdbc.Driver
+
+  #Redis
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    timeout: 3
+    pool:
+      minIdle: 1
+      maxIdle: 10
+      maxWait: 3
+      maxActive: 8
 
   thymeleaf:
     cache: true

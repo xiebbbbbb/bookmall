@@ -36,12 +36,12 @@
 
 
     <select id="find" resultType="com.xgy.bookmall.entity.OrderBook">
-        SELECT * FROM orderbook WHERE oId = #{orderBook.oId}
+        SELECT * FROM orderbook WHERE oId = #{oId}
     </select>
 
 
     <delete id="delete">
-        delete from orderbook where oId = #{orderBook.bId}
+        delete from orderbook where oId = #{oId}
     </delete>
 
 

@@ -14,7 +14,6 @@ public class OrderServiceImpl implements OrderService {
     @Autowired
     OrderMapper orderMapper;
 
-
     @Override
     public int insert(Order order) {
         int res = orderMapper.insert(order);
@@ -29,6 +28,7 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public int delete(int oId) {
+        System.out.println("oId = " + oId);
         return orderMapper.delete(oId);
     }
 

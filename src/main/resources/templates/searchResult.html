@@ -49,7 +49,7 @@
                 if(keyword == ''){
                     alert('请输入需要搜索的关键字！');
                 }else {
-                    $(location).attr('href', encodeURI('/searchResult.html?keyword=' + keyword));
+                    $(location).attr('href', encodeURI('/searchResult?keyword=' + keyword));
                 }
             });
 
@@ -76,7 +76,7 @@
                 function (data){
                     if(data.code){
                         let htmlll = '<li class="nav-item">\n' +
-                            '                    <a class="nav-link text-muted" id="lllogin" onclick="loginOut()" href="index.html">退出</a>\n' +
+                            '                    <a class="nav-link text-muted" id="lllogin" onclick="loginOut()" href="/index">退出</a>\n' +
                             '                </li>\n' +
                             '                <li class="nav-item dropdown">\n' +
                             '                    <a class="nav-link text-muted dropdown-toggle" href="#" id="navbarDropdown" data-toggle="dropdown">\n' +
@@ -85,9 +85,9 @@
                             '                    <div class="dropdown-menu">\n' +
                             '                        <a class="dropdown-item text-muted" href="#" >账户信息</a>\n' +
                             '                        <div class="dropdown-divider"></div>\n' +
-                            '                        <a class="dropdown-item text-muted" href="shoppingCart.html">我的购物车</a>\n' +
+                            '                        <a class="dropdown-item text-muted" href="/shoppingCart">我的购物车</a>\n' +
                             '                        <div class="dropdown-divider"></div>\n' +
-                            '                        <a class="dropdown-item text-muted" href="myOrder.html">我的订单</a>\n' +
+                            '                        <a class="dropdown-item text-muted" href="/myOrder">我的订单</a>\n' +
                             '                    </div>\n' +
                             '                </li>\n' +
                             '                <li class="nav-item">\n' +
@@ -98,10 +98,10 @@
                     }
                     else{
                         let htmlll = '<li class="nav-item">\n' +
-                            '                    <a class="nav-link text-muted" id="lllogin" href="login.html">登录</a>\n' +
+                            '                    <a class="nav-link text-muted" id="lllogin" href="/login">登录</a>\n' +
                             '                </li>\n' +
                             '                <li class="nav-item" >\n' +
-                            '                    <a class="nav-link text-muted" id="rrregist" href="regist.html">注册</a>\n' +
+                            '                    <a class="nav-link text-muted" id="rrregist" href="/regist">注册</a>\n' +
                             '                </li>\n' +
                             '                <li class="nav-item">\n' +
                             '                    <a class="nav-link text-muted" href="#">联系我们</a>\n' +
@@ -115,7 +115,7 @@
         function loginOut() {
             $.post('/user/userLogout',{},function (data) {
                 if(data.code === 900){
-                    window.location.href = "http://localhost:8080/index.html";
+                    window.location.href = "http://localhost:8080/index";
                 }
             })
         }
@@ -251,7 +251,7 @@
         //转到图书详情页面（缺少图书详情页面）
         function watchDetail(obj){
             let bId = $(obj).parents(".card-body-book").find("p:hidden").html();
-            $(location).attr('href', '/bookDetail.html?bId=' + bId);
+            $(location).attr('href', '/bookDetail?bId=' + bId);
         }
 
         //将图书加入购物车
@@ -333,7 +333,7 @@
         </div>
         <div class="col-lg-3 d-flex justify-content-start align-content-center">
             <div class="cartBtnBox">
-                <a id="cartBtn" href="shoppingCart.html" class="cart_icon"><i class="fa fa-shopping-cart icon_color"></i></a>
+                <a id="cartBtn" href="/shoppingCart" class="cart_icon"><i class="fa fa-shopping-cart icon_color"></i></a>
                 <input class="cartText" type="text" value="购物车" disabled="disabled">
             </div>
         </div>
