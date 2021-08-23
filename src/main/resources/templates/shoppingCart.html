@@ -14,14 +14,14 @@
     <div class="container">
         <!-- 顶部悬停栏 -->
         <nav class="navbar navbar-expand bg-navbar sticky-top">
-            <a href="index.html"><img src="./img/logo.png" alt=""/></a>
+            <a href="/index"><img src="./img/logo.png" alt=""/></a>
             <div class="collapse navbar-collapse justify-content-end">
                 <ul class="navbar-nav" id="navbarT">
                     <li class="nav-item">
-                        <a class="nav-link text-muted" id="lllogin" href="login.html">登录</a>
+                        <a class="nav-link text-muted" id="lllogin" href="/login">登录</a>
                     </li>
                     <li class="nav-item" >
-                        <a class="nav-link text-muted" id="rrregist" href="regist.html">注册</a>
+                        <a class="nav-link text-muted" id="rrregist" href="/regist">注册</a>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link text-muted dropdown-toggle" href="#" id="navbarDropdown" data-toggle="dropdown">
@@ -30,9 +30,9 @@
                         <div class="dropdown-menu">
                             <a class="dropdown-item text-muted" href="#" >账户信息</a>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item text-muted" href="shoppingCart.html">我的购物车</a>
+                            <a class="dropdown-item text-muted" href="/shoppingCart">我的购物车</a>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item text-muted" href="myOrder.html">我的订单</a>
+                            <a class="dropdown-item text-muted" href="/myOrder">我的订单</a>
                         </div>
                     </li>
                     <li class="nav-item">
@@ -63,7 +63,7 @@
                 function (data){
                     if(data.code){
                         let htmlll = '<li class="nav-item">\n' +
-                            '                    <a class="nav-link text-muted" id="lllogin" onclick="loginOut()" href="index.html">退出</a>\n' +
+                            '                    <a class="nav-link text-muted" id="lllogin" onclick="loginOut()" href="/index">退出</a>\n' +
                             '                </li>\n' +
                             '                <li class="nav-item dropdown">\n' +
                             '                    <a class="nav-link text-muted dropdown-toggle" href="#" id="navbarDropdown" data-toggle="dropdown">\n' +
@@ -72,9 +72,9 @@
                             '                    <div class="dropdown-menu">\n' +
                             '                        <a class="dropdown-item text-muted" href="#" >账户信息</a>\n' +
                             '                        <div class="dropdown-divider"></div>\n' +
-                            '                        <a class="dropdown-item text-muted" href="shoppingCart.html">我的购物车</a>\n' +
+                            '                        <a class="dropdown-item text-muted" href="/shoppingCart">我的购物车</a>\n' +
                             '                        <div class="dropdown-divider"></div>\n' +
-                            '                        <a class="dropdown-item text-muted" href="myOrder.html">我的订单</a>\n' +
+                            '                        <a class="dropdown-item text-muted" href="/myOrder">我的订单</a>\n' +
                             '                    </div>\n' +
                             '                </li>\n' +
                             '                <li class="nav-item">\n' +
@@ -86,10 +86,10 @@
                     }
                     else{
                         let htmlll = '<li class="nav-item">\n' +
-                            '                    <a class="nav-link text-muted" id="lllogin" href="login.html">登录</a>\n' +
+                            '                    <a class="nav-link text-muted" id="lllogin" href="/login">登录</a>\n' +
                             '                </li>\n' +
                             '                <li class="nav-item" >\n' +
-                            '                    <a class="nav-link text-muted" id="rrregist" href="regist.html">注册</a>\n' +
+                            '                    <a class="nav-link text-muted" id="rrregist" href="/regist">注册</a>\n' +
                             '                </li>\n' +
                             '                <li class="nav-item">\n' +
                             '                    <a class="nav-link text-muted" href="#">联系我们</a>\n' +
@@ -103,7 +103,7 @@
         function loginOut() {
             $.post('/user/userLogout',{},function (data) {
                 if(data.code === 900){
-                    window.location.href = "http://localhost:8080/index.html";
+                    window.location.href = "http://localhost:8080/index";
                 }
             })
         }
@@ -249,7 +249,7 @@
         }
 
         function watchDetail(bId){
-            $(location).attr('href', '/bookDetail.html?bId=' + bId);
+            $(location).attr('href', '/bookDetail?bId=' + bId);
         }
 
         function selectAll(selectAllId) {
@@ -432,7 +432,7 @@
                 alert("没有选中商品");
             }
             else{
-                window.location.href = "http://localhost:8080/confirmOrder.html";
+                window.location.href = "http://localhost:8080/confirmOrder";
             }
         }
 

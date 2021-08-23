@@ -33,7 +33,7 @@
                 if(keyword == ''){
                     alert('请输入需要搜索的关键字！');
                 }else {
-                    $(location).attr('href', encodeURI('/searchResult.html?keyword=' + keyword));
+                    $(location).attr('href', encodeURI('/searchResult?keyword=' + keyword));
                 }
             });
 
@@ -87,7 +87,7 @@
         //转到图书详情页面
         function watchDetail(obj){
             let bId = $(obj).parents(".card-body-book").find("p:hidden").html();
-            $(location).attr('href', '/bookDetail.html?bId=' + bId);
+            $(location).attr('href', '/bookDetail?bId=' + bId);
         }
 
         function isLogin() {
@@ -96,7 +96,7 @@
                     function (data){
                         if(data.code){
                             let htmlll = '<li class="nav-item">\n' +
-                                '                    <a class="nav-link text-muted" id="lllogin" onclick="loginOut()" href="./index.html">退出</a>\n' +
+                                '                    <a class="nav-link text-muted" id="lllogin" onclick="loginOut()" href="/index">退出</a>\n' +
                                 '                </li>\n' +
                                 '                <li class="nav-item dropdown">\n' +
                                 '                    <a class="nav-link text-muted dropdown-toggle" href="#" id="navbarDropdown" data-toggle="dropdown">\n' +
@@ -105,9 +105,9 @@
                                 '                    <div class="dropdown-menu">\n' +
                                 '                        <a class="dropdown-item text-muted" href="#" >账户信息</a>\n' +
                                 '                        <div class="dropdown-divider"></div>\n' +
-                                '                        <a class="dropdown-item text-muted" href="./shoppingCart.html">我的购物车</a>\n' +
+                                '                        <a class="dropdown-item text-muted" href="/shoppingCart">我的购物车</a>\n' +
                                 '                        <div class="dropdown-divider"></div>\n' +
-                                '                        <a class="dropdown-item text-muted" href="./myOrder.html">我的订单</a>\n' +
+                                '                        <a class="dropdown-item text-muted" href="/myOrder">我的订单</a>\n' +
                                 '                    </div>\n' +
                                 '                </li>\n' +
                                 '                <li class="nav-item">\n' +
@@ -135,7 +135,7 @@
         function loginOut() {
             $.post('/user/userLogout',{},function (data) {
                 if(data.code === 900){
-                    window.location.href = "http://localhost:8080/index.html";
+                    window.location.href = "http://localhost:8080/index";
                 }
             })
         }
@@ -180,7 +180,7 @@
 <div class="container container-bg">
     <!-- 顶部悬停栏 -->
     <nav class="navbar navbar-expand bg-navbar sticky-top">
-        <a href="./index.html"><img src="./img/logo.png" alt=""/></a>
+        <a href="/index"><img src="./img/logo.png" alt=""/></a>
         <div class="collapse navbar-collapse justify-content-end">
             <ul class="navbar-nav" id="navbarT">
                 <li class="nav-item">
@@ -212,7 +212,7 @@
     <div class="row mt-5 mb-5 bg-up">
         <div class="col-lg-3 d-flex justify-content-end align-content-center">
             <div class="libraryBtnBox">
-                <a id="libraryBtn" href="./searchResult.html" class="library_icon"><i class="fa fa-book icon_color"></i></a>
+                <a id="libraryBtn" href="/searchResult" class="library_icon"><i class="fa fa-book icon_color"></i></a>
                 <input class="libraryText" type="text" value="图书馆" disabled="disabled">
             </div>
         </div>
@@ -224,7 +224,7 @@
         </div>
         <div class="col-lg-3 d-flex justify-content-start align-content-center">
             <div class="cartBtnBox">
-                <a id="cartBtn" href="./shoppingCart.html" class="cart_icon"><i class="fa fa-shopping-cart icon_color"></i></a>
+                <a id="cartBtn" href="/shoppingCart" class="cart_icon"><i class="fa fa-shopping-cart icon_color"></i></a>
                 <input class="cartText" type="text" value="购物车" disabled="disabled">
             </div>
         </div>
