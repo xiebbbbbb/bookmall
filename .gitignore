@@ -5,3 +5,4 @@ target/*
 .classpath/*
 .project/*
 bookmall.iml
+src/main/resources/application.yml
