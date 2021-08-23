@@ -34,6 +34,7 @@ public class Application {
         };
     }
 
+    @Bean
     public Redisson redisson() {
         Config config = new Config();
         config.useSingleServer().setAddress(String.format("redis://%s:%d", redisHost, redisPort)).setDatabase(0);

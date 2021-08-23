@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @Controller
-//@RequestMapping("/jump")    // 所有方法都拥有的前缀
 public class JumpController {
 
     @RequestMapping("/bookDetail")

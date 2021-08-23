@@ -19,7 +19,7 @@ public interface OrderMapper {
     //删除订单
     int delete(@Param("oId") int oId);
 
-    //拿到oId??不知道能不能用
+    //可以拿到oId
     int getoId();
 
     //查询某个订单
