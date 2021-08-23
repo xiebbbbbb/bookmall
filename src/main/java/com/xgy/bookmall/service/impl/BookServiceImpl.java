@@ -4,9 +4,11 @@ import com.xgy.bookmall.entity.Book;
 import com.xgy.bookmall.mapper.BookMapper;
 import com.xgy.bookmall.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service("bookService")
 public class BookServiceImpl implements BookService {
 
     @Autowired

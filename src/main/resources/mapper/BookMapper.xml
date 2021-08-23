@@ -4,7 +4,7 @@
 <mapper namespace="com.xgy.bookmall.mapper.BookMapper">
 
     <select id="findAll" resultType="com.xgy.bookmall.entity.Book">
-        SELECT * FROM books WHERE LIMIT ${(p - 1) * 18}, 18
+        SELECT * FROM books LIMIT ${(p - 1) * 18}, 18
     </select>
 
     <select id="getTotNum" resultType="Integer">

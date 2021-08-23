@@ -221,6 +221,7 @@
 
         function fillPanel(data, pageNo){
             let booksList = data.booksList.parseJSON();
+            console.log("booksList: " + booksList);
             let books = '<div class="row">';
             for(let i = 0; i < booksList.length; i++){
                 books += '<div class="col-lg-4 col-md-6 col-sm-12">\n' +
