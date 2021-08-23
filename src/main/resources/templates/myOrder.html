@@ -14,7 +14,7 @@
     <div class="container container-bg">
         <!-- 顶部悬停栏 -->
         <nav class="navbar navbar-expand bg-navbar sticky-top">
-            <a href="/index"><img src="./img/logo.png" alt=""/></a>
+            <a href="/index"><img src="/img/logo.png" alt=""/></a>
             <div class="collapse navbar-collapse justify-content-end">
                 <ul class="navbar-nav" id="navbarT">
                     <li class="nav-item">
@@ -118,8 +118,9 @@
                 url: '/order/findAll',
                 data:{},
                 success: function (data){
+                    console.log("data:" + data);
                     let list = data.list;
-                    console.log(list);
+                    console.log("list:" + list);
                     let sendIng = '';
                     let getEd = '';
                     let orderShow = '<div class="row border" style="line-height: 2.5">\n' +
@@ -161,7 +162,7 @@
                                     '                                                <div  class="container">\n' +
                                     '                                                    <div class="row">\n' +
                                     '                                                        <div class="col-sm-5">\n' +
-                                    '                                                            <img src='+oneOrderlist[j].bUri+'"../../../../../../../WeChat/WeChatFiles/WeChat%20Files/wxid_1wbvtscxr7vc22/FileStorage/File/2021-08/BookMall/public/img" class="cartimg" onclick="watchDetail('+oneOrderlist[j].bId+')" alt="书本图片">\n' +
+                                    '                                                            <img src='+oneOrderlist[j].bUri+'"/img" class="cartimg" onclick="watchDetail('+oneOrderlist[j].bId+')" alt="书本图片">\n' +
                                     '                                                        </div>\n' +
                                     '                                                        <div class="col-sm-7">\n' +
                                     '                                                            <a href="#" class="text-dark text-decoration-none" onclick="watchDetail('+oneOrderlist[j].bId+')">&nbsp;&nbsp;'+oneOrderlist[j].bName+'</a>\n' +
@@ -209,13 +210,14 @@
                                 '                            <div class="row border">\n' +
                                 '                                <div class="col-sm-6 border-right">';
                             let oneOrderlist = findOneOrder(list[i].oId);
+                            //有bug，findOrder还没有写好
                             for(let j=0; j< oneOrderlist.length; j++){
                                 getEd += ' <div class="row border-top">\n' +
                                     '                                            <div class="col-sm-6">\n' +
                                     '                                                <div  class="container">\n' +
                                     '                                                    <div class="row">\n' +
                                     '                                                        <div class="col-sm-5">\n' +
-                                    '                                                            <img src='+oneOrderlist[j].bUri+'"../../../../../../../WeChat/WeChatFiles/WeChat%20Files/wxid_1wbvtscxr7vc22/FileStorage/File/2021-08/BookMall/public/img" class="cartimg" onclick="watchDetail('+oneOrderlist[j].bId+')" alt="书本图片">\n' +
+                                    '                                                            <img src='+oneOrderlist[j].bUri+'"/img" class="cartimg" onclick="watchDetail('+oneOrderlist[j].bId+')" alt="书本图片">\n' +
                                     '                                                        </div>\n' +
                                     '                                                        <div class="col-sm-7">\n' +
                                     '                                                            <a href="#" class="text-decoration-none text-dark" onclick="watchDetail('+oneOrderlist[j].bId+')">&nbsp;&nbsp;'+oneOrderlist[j].bName+'</a>\n' +
