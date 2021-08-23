@@ -1,8 +1,12 @@
 package com.xgy.bookmall.controller;
 
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.xgy.bookmall.entity.Book;
+import com.xgy.bookmall.entity.BookDetail;
 import com.xgy.bookmall.entity.Order;
 import com.xgy.bookmall.entity.OrderBook;
+import com.xgy.bookmall.service.BookService;
 import com.xgy.bookmall.service.OrderBookService;
 import com.xgy.bookmall.service.OrderService;
 import org.redisson.Redisson;
@@ -32,6 +36,9 @@ public class OrderController {
 
     @Autowired
     OrderBookService orderBookService;
+
+    @Autowired
+    BookService bookService;
 
     //秒杀
     @GetMapping("/secKill")
@@ -76,7 +83,9 @@ public class OrderController {
         int uId = Integer.parseInt(uIdStr);
         System.out.println(uId);
         List<Order> orders = orderService.findAll(uId);
-        ret.put("list" , orders);
+        String jStr = JSONArray.toJSON(orders).toString();
+//        ret.put("list" , orders);
+        ret.put("list" , jStr);
         ret.put("code", 400);
         System.out.println("order" + ret);
         return ret;
@@ -160,9 +169,11 @@ public class OrderController {
     @ResponseBody
     public JSONObject findOne(@RequestParam("oId") int oId){
         JSONObject ret = new JSONObject();
-        List<OrderBook> orderBookList = orderBookService.find(oId);
-        //根据bId获取图书信息
-
+        List<BookDetail> orderBookList = orderBookService.find(oId);
+        String bookDetail = JSONArray.toJSON(orderBookList).toString();
+        System.out.println("result: " + bookDetail);
+        ret.put("result", bookDetail);
+        ret.put("code", 400);
         return ret;
     }
 

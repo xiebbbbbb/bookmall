@@ -1,5 +1,6 @@
 package com.xgy.bookmall.service;
 
+import com.xgy.bookmall.entity.BookDetail;
 import com.xgy.bookmall.entity.OrderBook;
 import org.apache.ibatis.annotations.Param;
 
@@ -13,5 +14,5 @@ public interface OrderBookService {
     int delete(@Param("oId") int oId);
 
     //查询所有订单
-    List<OrderBook> find(@Param("oId") int oId);
+    List<BookDetail> find(@Param("oId") int oId);
 }

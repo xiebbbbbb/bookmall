@@ -1,5 +1,6 @@
 package com.xgy.bookmall.mapper;
 
+import com.xgy.bookmall.entity.BookDetail;
 import com.xgy.bookmall.entity.Order;
 import com.xgy.bookmall.entity.OrderBook;
 import org.apache.ibatis.annotations.Mapper;
@@ -17,7 +18,7 @@ public interface OrderBookMapper {
     int delete(@Param("oId") int oId);
 
     //查询所有订单
-    List<OrderBook> find(@Param("oId") int oId);
+    List<BookDetail> find(@Param("oId") int oId);
 
 
 }

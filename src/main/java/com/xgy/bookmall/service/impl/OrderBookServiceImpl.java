@@ -1,5 +1,6 @@
 package com.xgy.bookmall.service.impl;
 
+import com.xgy.bookmall.entity.BookDetail;
 import com.xgy.bookmall.entity.OrderBook;
 import com.xgy.bookmall.mapper.OrderBookMapper;
 import com.xgy.bookmall.mapper.OrderMapper;
@@ -29,7 +30,7 @@ public class OrderBookServiceImpl implements OrderBookService {
     }
 
     @Override
-    public List<OrderBook> find(int oId) {
+    public List<BookDetail> find(int oId) {
         return orderBookMapper.find(oId);
     }
 }

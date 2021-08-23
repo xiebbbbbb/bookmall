@@ -119,7 +119,8 @@
                 data:{},
                 success: function (data){
                     console.log("data:" + data);
-                    let list = data.list;
+                    // let list = data.list;
+                    let list = JSON.parse(data.list);
                     console.log("list:" + list);
                     let sendIng = '';
                     let getEd = '';
@@ -209,7 +210,10 @@
                                 '                            </div>\n' +
                                 '                            <div class="row border">\n' +
                                 '                                <div class="col-sm-6 border-right">';
+                            console.log("list[i]:" + list[i]);
+                            console.log("list[i].oId:" + list[i].oId);
                             let oneOrderlist = findOneOrder(list[i].oId);
+                            console.log("oneOrderList:"+ oneOrderlist);
                             //有bug，findOrder还没有写好
                             for(let j=0; j< oneOrderlist.length; j++){
                                 getEd += ' <div class="row border-top">\n' +
@@ -272,8 +276,8 @@
                 async: false,
                 success: function (data) {
                     if(data.code === 400){
-                        list = data.result;
-                        console.log("hhhhhh: 2");
+                        list = JSON.parse(data.result);
+                        console.log("xgy_list:" + list);
                     }
                 },
                 error: function (data) {
@@ -281,7 +285,7 @@
                 }
             })
             console.log("hhhhhh: 3");
-             return list;
+            return list;
 
         }
 
