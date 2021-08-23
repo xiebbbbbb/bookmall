@@ -108,11 +108,8 @@
                 {
                     bId: boo
                 },function (data) {
-                    //console.log(data)
-                    let book = data.result[0];
-                    console.log(book);
-                    console.log(book.bUri);
-                    let content = '<div class="mr-1"><img alt="" src="./img"/></div>';
+                    let book = JSON.parse(data.bookInfo);
+                    let content = '<div class="mr-1"><img alt="" src="./img/bookCover/' + book.bUri + '"/></div>';
                     content += '<div class="d-flex flex-column justify-content-around pl-5 pr-5 ">\n' +
                         '        <!--书名-->\n' +
                         '        <div class="h4 text-center"><span id="bName" >'+book.bName+'</span></div>\n' +

@@ -10,15 +10,51 @@ import org.springframework.web.bind.annotation.RestController;
 //@RequestMapping("/jump")    // 所有方法都拥有的前缀
 public class JumpController {
 
+    @RequestMapping("/bookDetail")
+    public String bookDetail() {
+        return "bookDetail";
+    }
+
+    @RequestMapping("/searchResult")
+    public String searchResult() {
+        return "searchResult";
+    }
+
+    @RequestMapping("/confirmOrder")
+    public String confirmOrder() {
+        return "confirmOrder";
+    }
+
     @RequestMapping("/login")
     public String login() {
-        System.out.println("11");
         return "login";
     }
 
-    @RequestMapping("regist")
+    @RequestMapping("/regist")
     public String regist() {
-
         return "regist";
     }
+
+    @RequestMapping("/shoppingCart")
+    public String shoppingCart() {
+        return "shoppingCart";
+    }
+
+    @RequestMapping("/myOrder")
+    public String myOrder() {
+        return "myOrder";
+    }
+
+    @RequestMapping("/index")
+    public String index() {
+        return "index";
+    }
+
+    @RequestMapping("/showDetail")
+    public String showDetail(){
+        return "bookDetail";
+    }
 }
+
+
+
