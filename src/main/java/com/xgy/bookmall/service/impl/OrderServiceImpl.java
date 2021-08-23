@@ -14,7 +14,6 @@ public class OrderServiceImpl implements OrderService {
     @Autowired
     OrderMapper orderMapper;
 
-
     @Override
     public int insert(Order order) {
         int res = orderMapper.insert(order);
