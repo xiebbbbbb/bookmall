@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.xgy.bookmall.mapper.BookMapper">
+
+    <select id="findAll" resultType="com.xgy.bookmall.entity.Book">
+        SELECT * FROM books WHERE LIMIT ${(p - 1) * 18}, 18
+    </select>
+
+    <select id="getTotNum" resultType="Integer">
+        SELECT COUNT(*) AS total FROM books
+    </select>
+
+    <select id="showDetail" resultType="com.xgy.bookmall.entity.Book">
+        SELECT * FROM books WHERE bId = #{bId}
+    </select>
+
+    <select id="searchByKey" resultType="com.xgy.bookmall.entity.Book">
+        SELECT * FROM books
+        WHERE bName LIKE %#{key}% OR bAuthor LIKE %#{key}% OR
+        bDescription LIKE %#{key}% OR bTag LIKE %#{key}% OR
+        bPublisher LIKE %#{key}%
+        LIMIT ${(p - 1) * 18}, 18
+    </select>
+
+</mapper>
