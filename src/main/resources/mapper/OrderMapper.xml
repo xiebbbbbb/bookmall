@@ -36,7 +36,7 @@
 
 
     <select id="findAll" resultType="com.xgy.bookmall.entity.Order">
-        SELECT * FROM orders WHERE uId = #{order.uId}
+        SELECT * FROM orders WHERE uId = #{uId}
     </select>
 
     <select id="getoId" resultType="int">
@@ -44,15 +44,15 @@
     </select>
 
     <select id="find" resultType="com.xgy.bookmall.entity.Order">
-        SELECT * FROM orders WHERE oId = #{order.oId}
+        SELECT * FROM orders WHERE oId = #{oId}
     </select>
 
     <update id="receive">
-        UPDATE orders SET oState='已完成' WHERE oId = #{order.oId}
+        UPDATE orders SET oState='已完成' WHERE oId = #{oId}
     </update>
 
     <delete id="delete">
-        delete from orders where oId = #{order.oId}
+        delete from orders where oId = #{oId}
     </delete>
 
 
