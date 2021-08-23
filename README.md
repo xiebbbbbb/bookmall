@@ -4,7 +4,6 @@
 ## 版本
 
 
----
 
 
 * JDK14
@@ -16,18 +15,16 @@
 ## 如何运行
 
 
----
 
 
 1. 在IDEA中build
 2. 运行src/main/java/com/xgy/bookmall/Application.java
-3. 打开浏览器，输入http://localhost:8765/
+3. 打开浏览器，输入http://localhost:8080/
 
 
 ## 各个文件说明
 
 
----
 
 
 目录结构（从src/main开始）：
@@ -49,7 +46,6 @@
 ## 思路
 
 
----
 
 
 * 用户请求，服务器响应（request，response）
