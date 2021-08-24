@@ -128,7 +128,7 @@ public class OrderController {
         return ret;
     }
 
-    //postman测试成功
+    //postman测试成功，参数应该有点问题
     @PostMapping("/createOrder")
     @ResponseBody
     public JSONObject createOrder(@RequestParam("oTotalPrice") float oTotalPrice,
