@@ -15,7 +15,7 @@
         SELECT * FROM books WHERE bId = #{bId}
     </select>
 
-    <select id="searchByKey" resultType="com.xgy.bookmall.entity.Book">
+    <select id="searchByKey" resultType="com.xgy.bookmall.entity.Book" parameterType="String">
         SELECT * FROM books
         WHERE bName LIKE #{key}
             OR bAuthor LIKE #{key}
@@ -25,20 +25,34 @@
         LIMIT ${(p - 1) * 18}, 18
     </select>
 
-    <select id="getTotNumByKey" resultType="Integer">
-        SELECT COUNT(*) FROM books
-        WHERE bName LIKE %#{key}% OR bAuthor LIKE %#{key}% OR
-                bDescription LIKE %#{key}% OR bTag LIKE %#{key}% OR
-                bPublisher LIKE %#{key}%
-        AS total
+    <select id="getTotNumByKey" resultType="Integer" parameterType="String">
+        SELECT COUNT(*) AS total FROM books
+        WHERE bName LIKE #{key} OR bAuthor LIKE #{key} OR
+                bDescription LIKE #{key} OR bTag LIKE #{key} OR
+                bPublisher LIKE #{key}
     </select>
+
+    <!--select id="searchByTags" resultType="com.xgy.bookmall.entity.Book" parameterType="String">
+        SELECT * FROM books WHERE bTag IN #{tags} LIMIT ${(p - 1) * 18}, 18
+    </select-->
 
     <select id="searchByTags" resultType="com.xgy.bookmall.entity.Book">
-        SELECT * FROM books WHERE bTag IN (#{tags}) LIMIT * 18}, 18
+        SELECT * FROM books WHERE bTag IN
+        <foreach collection="List" item="item" index="index" open="(" separator="," close=")">
+        #{item}
+        </foreach>
+        LIMIT ${(p - 1) * 18}, 18
     </select>
 
+    <!--select id="getTotNumByTags" resultType="Integer" parameterType="String">
+        SELECT COUNT(*) AS total FROM books WHERE bTag IN #{tags}
+    </select-->
+
     <select id="getTotNumByTags" resultType="Integer">
-        SELECT COUNT(*) FROM books WHERE bTag IN (#{tags}) AS total
+        SELECT COUNT(*) AS total FROM books WHERE bTag IN
+        <foreach collection="List" item="item" index="index" open="(" separator="," close=")">
+        #{item}
+        </foreach>
     </select>
 
 </mapper>

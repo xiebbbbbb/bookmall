@@ -40,12 +40,22 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public List<Book> searchByTags(int p, String tags) {
+    public List<Book> searchByTags(int p, List<String> tags) {
         return bookMapper.searchByTags(p, tags);
     }
 
     @Override
-    public int getTotNumByTags(String tags) {
+    public int getTotNumByTags(List<String> tags) {
         return bookMapper.getTotNumByTags(tags);
     }
+
+//    @Override
+//    public List<Book> searchByTags(int p, String tags) {
+//        return bookMapper.searchByTags(p, tags);
+//    }
+//
+//    @Override
+//    public int getTotNumByTags(String tags) {
+//        return bookMapper.getTotNumByTags(tags);
+//    }
 }

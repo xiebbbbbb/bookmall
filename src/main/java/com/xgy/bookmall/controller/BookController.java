@@ -55,10 +55,10 @@ public class BookController {
     public JSONObject searchByKey(@RequestParam("p") int p, @RequestParam("key") String key){
         System.out.println("key: " + key);
         JSONObject res = new JSONObject();
-        List<Book> booksList = bookService.searchByKey(p, "'%" + key + "%'");
+        List<Book> booksList = bookService.searchByKey(p, "%" + key + "%");
         String jStr = JSON.toJSONString(booksList);
         res.put("booksList", jStr);
-        int total = bookService.getTotNumByKey(key);
+        int total = bookService.getTotNumByKey("%" + key + "%");
         res.put("total", total);
 
         return res;
@@ -68,10 +68,13 @@ public class BookController {
     @ResponseBody
     public JSONObject searchByTags(@RequestParam("p") int p, @RequestParam("tags") String tags){
         JSONObject res = new JSONObject();
-        List<Book> booksList = bookService.searchByKey(p, tags);
+        System.out.println("tags: " + tags);
+        List<String> tagsInfo = JSON.parseArray(tags, String.class);
+        System.out.println(tagsInfo);
+        List<Book> booksList = bookService.searchByTags(p, tagsInfo);
         String jStr = JSON.toJSONString(booksList);
         res.put("booksList", jStr);
-        int total = bookService.getTotNumByTags(tags);
+        int total = bookService.getTotNumByTags(tagsInfo);
         res.put("total", total);
 
         return res;

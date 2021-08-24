@@ -36,7 +36,7 @@
             // })(jQuery);
             // let keyword = $.getUrlParam('keyword');
             keyword = uri.split('=')[1];
-            console.log(keyword);
+            //console.log(keyword);
             if(keyword == null) {
                 showAllBooks();
             } else{
@@ -136,11 +136,15 @@
                 });
             }
             else if(data.keyword == null && data.labels != null){
+                console.log("tags: " + JSON.stringify(data.labels));
+                // for(let i = 0; i < data.labels.length; i++)
+                //     data.labels[i] = "'" + data.labels[i] + "'";
                 $.ajax({
                     method: 'GET',
                     data: {
                         'p': pageNo,
-                        'tagList' : data.labels.join()
+                        //'tags' : data.labels.join()
+                        'tags' : JSON.stringify(data.labels)
                     },
                     url: '/book/searchByTags',
                     success: function (data){
@@ -220,13 +224,14 @@
         }
 
         function fillPanel(data, pageNo){
-            let booksList = data.booksList.parseJSON();
-            console.log("booksList: " + booksList);
+            console.log("total: " + data.total);
+            let booksList = eval(data.booksList);
+            //console.log("booksList: " + booksList);
             let books = '<div class="row">';
             for(let i = 0; i < booksList.length; i++){
                 books += '<div class="col-lg-4 col-md-6 col-sm-12">\n' +
                     '                <div class="card mb-4 shadow-sm">\n' +
-                    '                    <img src="/public/img/bookCover/' + booksList[i].bUri + '" alt="" class="book-img">\n' +
+                    '                    <img src="./img/bookCover/' + booksList[i].bUri + '" alt="" class="book-img">\n' +
                     '                    <div class="card-body-book">\n' +
                     '                        <div class="book-info">\n' +
                     '                            <p hidden="hidden">' + booksList[i].bId + '</p>\n' +
