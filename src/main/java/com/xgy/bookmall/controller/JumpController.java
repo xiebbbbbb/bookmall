@@ -14,6 +14,11 @@ public class JumpController {
         return "bookDetail";
     }
 
+    @RequestMapping("/secKill")
+    public String secKill() {
+        return "secKill";
+    }
+
     @RequestMapping("/searchResult")
     public String searchResult() {
         return "searchResult";
