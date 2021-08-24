@@ -21,16 +21,4 @@ public class Cart {
     public int getBNum() {
         return bNum;
     }
-
-    public int getUId() {
-        return uId;
-    }
-
-    public int getBId() {
-        return bId;
-    }
-
-    public int getStatus() {
-        return status;
-    }
 }

@@ -29,12 +29,12 @@
         update cart SET status = #{status} WHERE uId = #{uId} AND bId = #{bId}
     </update>
 
-    <select id="selectBetween" resultType="com.xgy.bookmall.entity.Cart">
+    <select id="selectBetweenCartAndBooks" resultType="com.xgy.bookmall.entity.Book">
         SELECT * FROM cart AS c, books AS b WHERE c.bId = b.bId AND c.uId=#{uId}
     </select>
 
     <select id="countSum" resultType="double">
-        SELECT SUM(bNum * bPrice)  FROM `books` as b, `cart` as c WHERE c.status=1 AND uId=#{uId} AND b.bId=c.bId
+        SELECT SUM(bNum * bPrice)  FROM books as b, cart as c WHERE c.status=1 AND uId=#{uId} AND b.bId=c.bId
     </select>
 
 </mapper>
