@@ -13,7 +13,7 @@ public class Book {
     private String bDescription;
     private String bAuthor;
     private String bTag;
-    private int bPrice;
+    private double bPrice;
     private String bPublisher;
     private String bUri;
 

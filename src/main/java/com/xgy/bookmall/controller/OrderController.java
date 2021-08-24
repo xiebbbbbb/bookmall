@@ -43,11 +43,16 @@ public class OrderController {
     //秒杀
     @GetMapping("/secKill")
     @ResponseBody
-    public JSONObject secKill(@RequestParam("bId") int bId , HttpSession httpSession) throws InterruptedException{
+    public JSONObject secKill(@RequestParam("bId") int bId ,
+                              @RequestParam("oTotalPrice") float oTotalPrice,
+                              @RequestParam("oAddress") String oAddress,
+                              @RequestParam("bNum") int bNum,
+                              HttpSession httpSession) throws InterruptedException{
         JSONObject ret = new JSONObject();
         String lockKey = bId + "";
         Object uIdObj = httpSession.getAttribute("uId");
         String uIdStr = uIdObj.toString();
+        int uId = Integer.parseInt(uIdStr);
         RLock redissonLock = redisson.getLock(lockKey);
         try{
             redissonLock.lock(9, TimeUnit.SECONDS);
@@ -59,7 +64,16 @@ public class OrderController {
                 stringRedisTemplate.opsForValue().set("stock", realStock + "");
                 System.out.println("抢到了，剩余库存：" + realStock);
                 //code666 为抢到
-                ret.put("code" , 666);
+                int res2 = 0;
+                int res1 = orderService.insert(new Order(0 , uId , oTotalPrice , oAddress , "进行中"));
+                int oId = orderService.getoId();
+                System.out.println("oId:" + oId);
+                res2 = orderBookService.insert(new OrderBook(oId, bId, bNum) );
+                if(res1 !=0 && res2 != 0) {
+                    ret.put("code" , 666);
+                }else {
+                    ret.put("code" , 777);
+                }
             }else {
                 System.out.println("没有抢到，库存不足");
                 //code700 为抢不到
@@ -68,7 +82,6 @@ public class OrderController {
         }finally {
             redissonLock.unlock();
         }
-
         System.out.println("secKill" + ret);
         return ret;
     }

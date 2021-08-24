@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>抢购页面</title>
+    <link href="./css/bootstrap.css" rel="stylesheet">
+    <link rel="stylesheet" href="./css/index.css"/>
+    <link rel="stylesheet" href="./css/product.css"/>
+    <link rel="stylesheet" href="./css/font-awesome.css"/>
+    <script src="./js/jquery.min.js"></script>
+    <script src="./js/popper.min.js"></script>
+    <script src="./js/bootstrap.min.js"></script>
+    <style type="text/css">
+        * {
+            padding: 0;
+            margin: 0;
+        }
+    </style>
+    <script>
+        $(document).ready(function (){
+            let uri = decodeURI(window.location.href);
+            // let bId = uri.split('=')[1];
+            let bId = parseInt(Math.random() * 233 + 1 , 10);
+            //console.log(bId);
+            //判断登录
+            isLogin();
+            showDetail(bId);
+            showtime();
+        });
+
+        function showtime(t = 300){
+            for(i=1;i<=t;i++) {
+                window.setTimeout("update_p(" + i + ","+t+")", i * 1000);
+            }
+
+        }
+
+        function update_p(num,t) {
+            let left = t - num;
+            let leftM = Math.floor(left / 60);
+            let leftS = left % 60;
+            if(num == t)
+            {
+                document.getElementById("qgButton").disabled="";
+                document.getElementById("time").innerHTML = "可以开始抢购了！";
+            }
+            else {
+                document.getElementById("time").innerHTML = "距离抢购还有" + leftM + "分" + leftS + "秒";
+            }
+        }
+
+
+        function isLogin() {
+            $.post('/user/isLogin',
+                {},
+                function (data){
+                    if(data.code){
+                        let htmlll = '<li class="nav-item">\n' +
+                            '                    <a class="nav-link text-muted" id="lllogin" onclick="loginOut()" href="/index">退出</a>\n' +
+                            '                </li>\n' +
+                            '                <li class="nav-item dropdown">\n' +
+                            '                    <a class="nav-link text-muted dropdown-toggle" href="#" id="navbarDropdown" data-toggle="dropdown">\n' +
+                            '                        我\n' +
+                            '                    </a>\n' +
+                            '                    <div class="dropdown-menu">\n' +
+                            '                        <a class="dropdown-item text-muted" href="#" >账户信息</a>\n' +
+                            '                        <div class="dropdown-divider"></div>\n' +
+                            '                        <a class="dropdown-item text-muted" href="/shoppingCart">我的购物车</a>\n' +
+                            '                        <div class="dropdown-divider"></div>\n' +
+                            '                        <a class="dropdown-item text-muted" href="/myOrder">我的订单</a>\n' +
+                            '                    </div>\n' +
+                            '                </li>\n' +
+                            '                <li class="nav-item">\n' +
+                            '                    <a class="nav-link text-muted" href="#">联系我们</a>\n' +
+                            '                </li>';
+
+                        $("#navbarT").html(htmlll);
+                    }
+                    else{
+                        let htmlll = '<li class="nav-item">\n' +
+                            '                    <a class="nav-link text-muted" id="lllogin" href="/login">登录</a>\n' +
+                            '                </li>\n' +
+                            '                <li class="nav-item" >\n' +
+                            '                    <a class="nav-link text-muted" id="rrregist" href="/regist">注册</a>\n' +
+                            '                </li>\n' +
+                            '                <li class="nav-item">\n' +
+                            '                    <a class="nav-link text-muted" href="#">联系我们</a>\n' +
+                            '                </li>';
+
+                        $("#navbarT").html(htmlll);
+                    }
+                })
+        }
+
+        function loginOut() {
+            $.post('/user/userLogout',{},function (data) {
+                if(data.code === 900){
+                    window.location.href = "http://localhost:8080/index.html";
+                }
+            })
+        }
+
+        function addOrder(bookId) {
+            $.post('/confirmOrder',
+                {
+                    bId: bookId
+                },
+                function(result){
+                    // console.log("123");
+                    // switch (result.code) {
+                    //     case 201:
+                    //         console.log('uId is null');
+                    //         break;
+                    //     case 202:
+                    //         console.log('bId is null');
+                    //         break;
+                    //     case 100:
+                    //         console.log('成功，加入一本书到用户的购物车');
+                    //         alert("加入成功")
+                    //         break;
+                    //     case 101:
+                    //         console.log('成功，图书已存在，数量+1');
+                    //         alert("图书已存在，数量+1")
+                    //         break;
+                    // }
+                }
+            );
+        }
+
+        function showDetail(boo) {
+            $.get('/book/showDetail',
+                {
+                    bId: boo
+                },function (data) {
+                    let book = JSON.parse(data.bookInfo);
+                    let content = '<div class="mr-1"><img alt="" src="./img/bookCover/' + book.bUri + '"/></div>';
+                    content += '<div class="d-flex flex-column justify-content-around pl-5 pr-5 ">\n' +
+                        '        <!--书名-->\n' +
+                        '        <div class="h4 text-center"><span id="bName" >'+book.bName+'</span></div>\n' +
+                        '        <!--描述-->\n' +
+                        '        <div class="text-secondary"><span id="bDescription">'+book.bDescription+'</span>\n' +
+                        '        </div>\n' +
+                        '        <hr/>\n' +
+                        '        <!--作者-->\n' +
+                        '        <div>作者：<span id="bAuthor">'+book.bAuthor+'</span></div>\n' +
+                        '        <!--出版社-->\n' +
+                        '        <div>出版社：<span id="bPublisher">'+book.bPublisher+'</span></div>\n' +
+                        '        <!--价格-->\n' +
+                        '        <div>价格：<span class="text-danger">￥</span><span id="bPrice" class="text-danger">'+book.bPrice / 10+'</span></div>\n' +
+                        '        <!--加入购物车-->\n' +
+                        '        <div class=""><input id = "qgButton" class="btn btn-danger" type="button" onclick="addOrder('+boo+')" value="抢购"' +
+                        ' disabled = "true"></div>\n' +
+                        '    </div>';
+                    $("#Detail").html(content);
+                })
+        }
+    </script>
+</head>
+<body>
+<!-- 顶部悬停栏 -->
+<div class="container container-bg">
+    <nav class="navbar navbar-expand bg-navbar sticky-top">
+        <a href="/index"><img src="./img/logo.png" alt=""/></a>
+        <div class="collapse navbar-collapse justify-content-end">
+            <ul class="navbar-nav" id="navbarT">
+                <li class="nav-item">
+                    <a class="nav-link text-muted" id="lllogin" href="/login">登录</a>
+                </li>
+                <li class="nav-item" >
+                    <a class="nav-link text-muted" id="rrregist" href="/regist">注册</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link text-muted dropdown-toggle" href="#" id="navbarDropdown" data-toggle="dropdown">
+                        我
+                    </a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item text-muted" href="#" >账户信息</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item text-muted" href="/shoppingCart">我的购物车</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item text-muted" href="/myOrder">我的订单</a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-muted" href="#">联系我们</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <!-- 图书馆按钮 + 搜索框 + 购物车按钮 -->
+    <div class="row mt-5 mb-5 bg-up">
+        <span id="time"></span>
+    </div>
+    <div id="Detail" class="container container-lg d-flex flex-row w-75 mt-2 border pt-1 pb-1 rounded shadow">
+    </div>
+</div>
+
+</body>
+</html>

@@ -1,13 +1,20 @@
 package com.xgy.bookmall.entity;
 
+
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.apache.ibatis.annotations.Param;
+
+@Data
+@NoArgsConstructor
 public class CartBook{
 
-    public int uId;
-    public int bId;
-    public String bName;
-    public int bPrice;
-    public String bUri;
-    public int bNum;
+    private int uId;
+    private int bId;
+    private String bName;
+    private int bPrice;
+    private String bUri;
+    private int bNum;
 
     public CartBook(int uId, int bId, String bName, int bPrice, String bUri, int bNum) {
         this.uId = uId;
@@ -17,4 +24,5 @@ public class CartBook{
         this.bUri = bUri;
         this.bNum = bNum;
     }
+
 }
