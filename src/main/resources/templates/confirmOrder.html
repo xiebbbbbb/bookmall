@@ -145,7 +145,7 @@
                                     '                            <div  class="container">\n' +
                                     '                                <div class="row">\n' +
                                     '                                    <div class="col-sm-3">\n' +
-                                    '                                        <img src=' + booksList[i].bUri + '"../../../../../../../WeChat/WeChatFiles/WeChat%20Files/wxid_1wbvtscxr7vc22/FileStorage/File/2021-08/BookMall/public/img" class="cartimg" alt="书本图片">\n' +
+                                    '                                        <img src="./img/' + booksList[i].bUri + '" class="cartimg" alt="书本图片">\n' +
                                     '                                    </div>\n' +
                                     '                                    <div class="col-sm-9">\n' +
                                     '                                        <a href="#">&nbsp;&nbsp;' + bName +'</a>\n' +
@@ -257,44 +257,12 @@
                 }})
         }
 
-
-        function testLogin() {
-            $.post('/user/userLogin',
-                {
-                    uName: "jc",
-                    uPwd: "1234",
-                },
-                function(result){
-                    switch (result.code) {
-                        case 300:
-                            console.log('登录成功');
-                            break;
-                        case 401:
-                            console.log('用户账号为空');
-                            break;
-                        case 402:
-                            console.log('用户名为空');
-                            break;
-                        case 403:
-                            console.log('密码为空');
-                            break;
-                        case 404:
-                            console.log('手机号码为空');
-                            break;
-                    }
-                }
-            );
-
-        }
-
         function submitOrder() {
             let oTP = $("#corderSum").text()*1;
-            console.log("123:"+oTP);
             let oA = $("#Receiver_name").text() + "," +
                     $("#Receiver_tel").text() + "," +
                     $("#Receiver_addr_1").text() + "," +
                     $("#Receiver_addr_2").text();
-            //Receiver_name Receiver_tel Receiver_addr_1 Receiver_addr_2
             $.post('/order/createOrder',
                 {
                     oTotalPrice: oTP,
@@ -311,12 +279,7 @@
         function getSum() {
             $.post('/cart/calcTotalPrice',
                 {},  (data) => {
-                    if(data.totalPrice[0].totalPrice === null){
-                        $('#corderSum').text("0");
-                    }
-                    else{
-                        $('#corderSum').text(data.totalPrice[0].totalPrice)
-                    }
+                    $('#corderSum').text(data.totalPrice)
                 }
             )
 

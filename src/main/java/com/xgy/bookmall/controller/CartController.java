@@ -50,21 +50,21 @@ public class CartController {
         return ret;
     }
 
-    @GetMapping("/deleteBook")
+    @PostMapping("/deleteBook")
     @ResponseBody
-    public JSONObject deleteBook(@RequestParam("bId") int bId , HttpSession httpSession) {
+    public JSONObject deleteBook(@RequestParam("bId") int bId , @RequestParam("deleteAnyHow") int deleteAnyHow, HttpSession httpSession) {
         JSONObject ret = new JSONObject();
         Object uIdObj = httpSession.getAttribute("uId");
         String uIdStr = uIdObj.toString();
         int uId = Integer.parseInt(uIdStr);
         List<Cart> carts = cartService.selectByUIdAndBId(uId, bId);
-        if (carts.get(0).getBNum() == 1) {
+        if (deleteAnyHow == 1 || carts.get(0).getBNum() == 1) {
             cartService.deleteByUIdAndBId(uId, bId);
             ret.put("code", 101);
             ret.put("msg", "successfully delete");
         } else {
             cartService.updateNumByUIdAndBId(uId, bId, carts.get(0).getBNum() - 1);
-            ret.put("code", 102);
+            ret.put("code", 101);
             ret.put("msg", "successfully minus");
         }
         return ret;
@@ -83,7 +83,7 @@ public class CartController {
         return ret;
     }
 
-    @GetMapping("/modifyBookNum")
+    @PostMapping("/modifyBookNum")
     @ResponseBody
     public JSONObject modifyBookNum(@RequestParam("bId") int bId, @RequestParam("bNum") int bNum, HttpSession httpSession) {
         JSONObject ret = new JSONObject();
@@ -109,7 +109,7 @@ public class CartController {
         return ret;
     }
 
-    @GetMapping("/calcTotalPrice")
+    @PostMapping("/calcTotalPrice")
     @ResponseBody
     public JSONObject calcTotalPrice(HttpSession httpSession) {
         JSONObject ret = new JSONObject();
