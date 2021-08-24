@@ -28,7 +28,7 @@ public class CartController {
     @Autowired
     BookService bookService;
 
-    @GetMapping("/addBook")
+    @PostMapping("/addBook")
     @ResponseBody
     public JSONObject addBook(@RequestParam("bId") int bId , HttpSession httpSession) {
         JSONObject ret = new JSONObject();
@@ -41,6 +41,7 @@ public class CartController {
             ret.put("code", 101);
             ret.put("msg", "successfully update");
         } else {
+            System.out.println("xgy");
             cartService.insert(new Cart(uId, bId, 1, 1));
             ret.put("code", 100);
             ret.put("msg", "successfully insert");

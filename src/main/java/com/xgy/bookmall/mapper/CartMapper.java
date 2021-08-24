@@ -14,7 +14,7 @@ public interface CartMapper {
     List<Cart> selectByUIdAndBId(@Param("uId") int uId, @Param("bId") int bId);
 
     // 插入图书
-    void insert(@Param("Cart") Cart cart);
+    void insert(@Param("cart") Cart cart);
 
     // 增减图书
     void updateNumByUIdAndBId(@Param("uId") int uId, @Param("bId") int bId, @Param("bNum") int bNum);
