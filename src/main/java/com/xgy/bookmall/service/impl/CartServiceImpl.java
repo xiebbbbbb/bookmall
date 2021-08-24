@@ -2,6 +2,7 @@ package com.xgy.bookmall.service.impl;
 
 import com.xgy.bookmall.entity.Book;
 import com.xgy.bookmall.entity.Cart;
+import com.xgy.bookmall.entity.CartBook;
 import com.xgy.bookmall.mapper.CartMapper;
 import com.xgy.bookmall.service.CartService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,7 +42,7 @@ public class CartServiceImpl implements CartService {
     }
 
     @Override
-    public List<Book> selectBetweenCartAndBooks(int uId) {
+    public List<CartBook> selectBetweenCartAndBooks(int uId) {
         return cartMapper.selectBetweenCartAndBooks(uId);
     }
 

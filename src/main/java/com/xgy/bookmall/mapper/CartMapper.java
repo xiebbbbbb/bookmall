@@ -2,6 +2,7 @@ package com.xgy.bookmall.mapper;
 
 import com.xgy.bookmall.entity.Cart;
 import com.xgy.bookmall.entity.Book;
+import com.xgy.bookmall.entity.CartBook;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -26,7 +27,7 @@ public interface CartMapper {
     void changeStatusByUIdAndBId(@Param("uId") int uId, @Param("bId") int bId, @Param(("status")) int status);
 
     // 联表查询
-    List<Book> selectBetweenCartAndBooks(@Param("uId") int uId);
+    List<CartBook> selectBetweenCartAndBooks(@Param("uId") int uId);
 
     // 联表计算合计金额
     double countSum(@Param("uId") int uId);

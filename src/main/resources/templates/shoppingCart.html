@@ -112,8 +112,8 @@
                         '            </div>';
 
                     for(let i = 0; i < booksList.length; i++){
+                        console.log(booksList[i].bUri);
                         let bchecked = booksList[i].status ? "checked" : "";
-                        //JSONObject booktemp = booksList[i].toJSON();
                         let bName = booksList[i].bName;
                         let bNum = booksList[i].bNum;
                         let bPrice = booksList[i].bPrice;
@@ -131,7 +131,7 @@
                             '                    <div  class="container">\n' +
                             '                        <div class="row">\n' +
                             '                            <div class="col-sm-3">\n' +
-                            '                                <img src = /resources/static/img' + booksList[i].bUri + '"./img" class="cartimg" onclick="watchDetail('+booksList[i].bId+')" alt="书本图片">\n' +
+                            '                                <img src = "./img/' + booksList[i].bUri + '" class="cartimg" onclick="watchDetail('+booksList[i].bId+')" alt="书本图片">\n' +
                             '                            </div>\n' +
                             '                            <div class="col-sm-9">\n' +
                             '                                <a href="#" class="text-dark text-decoration-none" onclick="watchDetail('+booksList[i].bId+')">&nbsp;&nbsp;' + bName +'</a>\n' +

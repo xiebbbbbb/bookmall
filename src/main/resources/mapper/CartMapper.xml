@@ -30,7 +30,7 @@
     </update>
 
     <select id="selectBetweenCartAndBooks" resultType="com.xgy.bookmall.entity.CartBook">
-        SELECT c.uId, c.bId, b.bName, b.bPrice, b.bUri, c.bNum FROM cart AS c, books AS b WHERE c.bId = b.bId AND c.uId=#{uId}
+        SELECT c.uId, c.bId, b.bName, b.bPrice, b.bUri, c.bNum, c.status FROM cart AS c, books AS b WHERE c.bId = b.bId AND c.uId=#{uId}
     </select>
 
     <select id="countSum" resultType="double">
