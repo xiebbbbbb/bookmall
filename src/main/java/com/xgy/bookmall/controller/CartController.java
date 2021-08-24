@@ -1,6 +1,7 @@
 package com.xgy.bookmall.controller;
 
 import com.alibaba.fastjson.JSONObject;
+import com.xgy.bookmall.entity.Book;
 import com.xgy.bookmall.entity.Cart;
 import com.xgy.bookmall.mapper.CartMapper;
 import com.xgy.bookmall.service.BookService;
@@ -100,7 +101,9 @@ public class CartController {
         Object uIdObj = httpSession.getAttribute("uId");
         String uIdStr = uIdObj.toString();
         int uId = Integer.parseInt(uIdStr);
-        // 联表查询
+        List<Book> books = cartService.selectBetweenCartAndBooks(uId);
+        ret.put("code", 101);
+        ret.put("booksList", books);
         return ret;
     }
 
@@ -111,7 +114,8 @@ public class CartController {
         Object uIdObj = httpSession.getAttribute("uId");
         String uIdStr = uIdObj.toString();
         int uId = Integer.parseInt(uIdStr);
-        // 联表计算
+        double sum = cartService.countSum(uId);
+        ret.put("totalPrice", sum);
         return ret;
     }
 }

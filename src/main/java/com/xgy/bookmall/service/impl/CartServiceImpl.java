@@ -21,33 +21,32 @@ public class CartServiceImpl implements CartService {
     }
 
     @Override
-    public int insert(Cart cart) {
-        return cartMapper.insert(cart);
+    public void insert(Cart cart) {
+        cartMapper.insert(cart);
     }
 
     @Override
-    public int updateNumByUIdAndBId(int uId, int bId, int bNum) {
-        return cartMapper.updateNumByUIdAndBId(uId, bId, bNum);
+    public void updateNumByUIdAndBId(int uId, int bId, int bNum) {
+        cartMapper.updateNumByUIdAndBId(uId, bId, bNum);
     }
 
     @Override
-    public int deleteByUIdAndBId(int uId, int bId) {
-        return cartMapper.deleteByUIdAndBId(uId, bId);
+    public void deleteByUIdAndBId(int uId, int bId) {
+        cartMapper.deleteByUIdAndBId(uId, bId);
     }
 
     @Override
-    public int changeStatusByUIdAndBId(int uId, int bId, int status) {
-        return cartMapper.changeStatusByUIdAndBId(uId, bId, status);
+    public void changeStatusByUIdAndBId(int uId, int bId, int status) {
+        cartMapper.changeStatusByUIdAndBId(uId, bId, status);
     }
 
     @Override
-    public List<Cart> selectBetweenTable(Cart cart, Book book) {
-        return cartMapper.selectBetween(cart, book);
+    public List<Book> selectBetweenCartAndBooks(int uId) {
+        return cartMapper.selectBetweenCartAndBooks(uId);
     }
 
-
     @Override
-    public int countSum(Cart cart, Book book, int uId) {
-        return cartMapper.countSum(cart, book, uId);
+    public double countSum(int uId) {
+        return cartMapper.countSum(uId);
     }
 }

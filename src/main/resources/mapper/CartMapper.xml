@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<!--
+    https://mybatis.org/mybatis-3/zh/sqlmap-xml.html
+    参考链接
+-->
+<!--namespace是Mapper类的路径-->
+<mapper namespace="com.xgy.bookmall.mapper.CartMapper">
+
+    <select id = "selectByUIdAndBId" resultType="com.xgy.bookmall.entity.Cart">
+        SELECT * FROM cart WHERE uId = #{uId} AND bId = #{bId}
+    </select>
+
+    <insert id="insert">
+        INSERT INTO cart(uId, bId, bNum, status) VALUES(#{cart.uId}, #{cart.bId}, #{cart.bNum}, #{cart.status})
+    </insert>
+
+    <update id="updateNumByUIdAndBId">
+        update cart SET bNum = #{bNum} WHERE uId = #{uId} AND bId = #{bId}
+    </update>
+
+    <delete id="deleteByUIdAndBId">
+        delete from cart WHERE uId = #{uId} AND bId = #{bId}
+    </delete>
+
+    <update id="changeStatusByUIdAndBId">
+        update cart SET status = #{status} WHERE uId = #{uId} AND bId = #{bId}
+    </update>
+
+    <select id="selectBetween" resultType="com.xgy.bookmall.entity.Cart">
+        SELECT * FROM cart AS c, books AS b WHERE c.bId = b.bId AND c.uId=#{uId}
+    </select>
+
+    <select id="countSum" resultType="double">
+        SELECT SUM(bNum * bPrice)  FROM `books` as b, `cart` as c WHERE c.status=1 AND uId=#{uId} AND b.bId=c.bId
+    </select>
+
+</mapper>

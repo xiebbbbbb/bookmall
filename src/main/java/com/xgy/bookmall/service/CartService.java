@@ -12,21 +12,20 @@ public interface CartService {
     List<Cart> selectByUIdAndBId(@Param("uId") int uId, @Param("bId") int bId);
 
     // 插入图书
-    int insert(@Param("Cart") Cart cart);
+    void insert(@Param("Cart") Cart cart);
 
     // 增减图书
-    int updateNumByUIdAndBId(@Param("uId") int uId, @Param("bId") int bId, @Param("bNum") int bNum);
+    void updateNumByUIdAndBId(@Param("uId") int uId, @Param("bId") int bId, @Param("bNum") int bNum);
 
     // 删除图书
-    int deleteByUIdAndBId(@Param("uId") int uId, @Param("bId") int bId);
+    void deleteByUIdAndBId(@Param("uId") int uId, @Param("bId") int bId);
 
     // 修改图书状态
-    int changeStatusByUIdAndBId(@Param("uId") int uId, @Param("bId") int bId, @Param(("status")) int status);
+    void changeStatusByUIdAndBId(@Param("uId") int uId, @Param("bId") int bId, @Param(("status")) int status);
 
     // 联表查询
-    List<Cart> selectBetweenTable(@Param("Cart") Cart cart, @Param("Book") Book book);
+    List<Book> selectBetweenCartAndBooks(@Param("uId") int uId);
 
     // 联表计算合计金额
-    int countSum(@Param("Cart") Cart cart, @Param("Book") Book book, @Param("uId") int uId);
-
+    double countSum(@Param("uId") int uId);
 }
