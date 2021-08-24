@@ -12,43 +12,18 @@
 </head>
 <body>
     <div class="container">
-        <!-- 顶部悬停栏 -->
         <nav class="navbar navbar-expand bg-navbar sticky-top">
             <a href="/index"><img src="./img/logo.png" alt=""/></a>
             <div class="collapse navbar-collapse justify-content-end">
                 <ul class="navbar-nav" id="navbarT">
-                    <li class="nav-item">
-                        <a class="nav-link text-muted" id="lllogin" href="/login">登录</a>
-                    </li>
-                    <li class="nav-item" >
-                        <a class="nav-link text-muted" id="rrregist" href="/regist">注册</a>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link text-muted dropdown-toggle" href="#" id="navbarDropdown" data-toggle="dropdown">
-                            我
-                        </a>
-                        <div class="dropdown-menu">
-                            <a class="dropdown-item text-muted" href="#" >账户信息</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item text-muted" href="/shoppingCart">我的购物车</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item text-muted" href="/myOrder">我的订单</a>
-                        </div>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-muted" href="#">联系我们</a>
-                    </li>
+                    <!-- 顶部悬停栏 -->
                 </ul>
             </div>
         </nav>
         <br>
         <h4>&nbsp;&nbsp;购物车</h4>
-<!--        <button class="btn btn-outline-info" onclick="testLogin()">登录</button>-->
-<!--        <button class="btn btn-outline-info" onclick="showAllBooks()">显示购物车</button>-->
-<!--        <button class="btn btn-outline-info" onclick="testCart()">随机加购</button>-->
         <div id="cart" class="container border  bg-light">
             <!--放购物车内容-->
-
         </div>
     </div>
     <script>
@@ -108,41 +83,11 @@
             })
         }
 
-        function testCart() {
-            let bookId = parseInt(Math.random() * (203) + 1);
-            $.post('/cart/addBook',
-                {
-                    bId: bookId
-                },
-                function(result){
-                console.log("123");
-                    switch (result.code) {
-                        case 201:
-                            console.log('uId is null');
-                            break;
-                        case 202:
-                            console.log('bId is null');
-                            break;
-                        case 100:
-                            console.log('成功，加入一本书到用户的购物车');
-                            showAllBooks();
-                            break;
-                        case 101:
-                            console.log('成功，图书已存在，数量+1');
-                            showAllBooks();
-                            break;
-                    }
-                }
-            );
-        }
-
         function showAllBooks() {   //显示所有图书
             $.ajax({
                 method: 'POST',
                 url: '/cart/getUserCart',
-                //data: 'uId=${11}',
                 success: function (data){
-
                     let booksList = data.booksList;
                     console.log(data);
                     let cartBooks = '<div class="row  border" style="line-height: 3.5">\n' +
@@ -168,6 +113,7 @@
 
                     for(let i = 0; i < booksList.length; i++){
                         let bchecked = booksList[i].status ? "checked" : "";
+                        //JSONObject booktemp = booksList[i].toJSON();
                         let bName = booksList[i].bName;
                         let bNum = booksList[i].bNum;
                         let bPrice = booksList[i].bPrice;
@@ -185,7 +131,7 @@
                             '                    <div  class="container">\n' +
                             '                        <div class="row">\n' +
                             '                            <div class="col-sm-3">\n' +
-                            '                                <img src=' + booksList[i].bUri + '"./img" class="cartimg" onclick="watchDetail('+booksList[i].bId+')" alt="书本图片">\n' +
+                            '                                <img src = /resources/static/img' + booksList[i].bUri + '"./img" class="cartimg" onclick="watchDetail('+booksList[i].bId+')" alt="书本图片">\n' +
                             '                            </div>\n' +
                             '                            <div class="col-sm-9">\n' +
                             '                                <a href="#" class="text-dark text-decoration-none" onclick="watchDetail('+booksList[i].bId+')">&nbsp;&nbsp;' + bName +'</a>\n' +

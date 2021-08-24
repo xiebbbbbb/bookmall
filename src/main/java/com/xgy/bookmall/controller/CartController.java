@@ -69,7 +69,7 @@ public class CartController {
         return ret;
     }
 
-    @GetMapping("/changeBookStatus")
+    @PostMapping("/changeBookStatus")
     @ResponseBody
     public JSONObject changeBookStatus(@RequestParam("bId") int bId, @RequestParam("status") int status, HttpSession httpSession) {
         JSONObject ret = new JSONObject();
@@ -95,7 +95,7 @@ public class CartController {
         return ret;
     }
 
-    @GetMapping("/getUserCart")
+    @PostMapping("/getUserCart")
     @ResponseBody
     public JSONObject getUserCart(HttpSession httpSession) {
         JSONObject ret = new JSONObject();
