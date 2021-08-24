@@ -36,8 +36,7 @@
 
 
     <select id="find" resultType="com.xgy.bookmall.entity.BookDetail">
---         SELECT * FROM orderbook WHERE oId = #{oId}
-        SELECT DISTINCT * FROM `orderbook` AS ob, `books` AS b WHERE b.bId = ob.bId AND ob.oId = #{oId}
+        SELECT * FROM `orderbook` AS ob, `orders` AS o , `books` AS b WHERE ob.oId=o.oId AND b.bId = ob.bId AND o.oId = #{oId}
     </select>
 
 
