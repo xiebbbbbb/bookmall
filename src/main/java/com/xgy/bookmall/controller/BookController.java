@@ -55,7 +55,9 @@ public class BookController {
     public JSONObject searchByKey(@RequestParam("p") int p, @RequestParam("key") String key){
         System.out.println("key: " + key);
         JSONObject res = new JSONObject();
-        List<Book> booksList = bookService.searchByKey(p, "'%" + key + "%'");
+//        ${(p - 1) * 18}
+        p = (p - 1) * 18;
+        List<Book> booksList = bookService.searchByKey(p, key);
         String jStr = JSON.toJSONString(booksList);
         res.put("booksList", jStr);
         int total = bookService.getTotNumByKey(key);

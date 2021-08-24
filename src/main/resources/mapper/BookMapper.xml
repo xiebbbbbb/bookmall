@@ -16,29 +16,23 @@
     </select>
 
     <select id="searchByKey" resultType="com.xgy.bookmall.entity.Book">
-        SELECT * FROM books
-        WHERE bName LIKE #{key}
-            OR bAuthor LIKE #{key}
-            OR bDescription LIKE #{key}
-            OR bTag LIKE #{key}
-            OR bPublisher LIKE #{key}
-        LIMIT ${(p - 1) * 18}, 18
+        SELECT * FROM books WHERE bName LIKE '%${key}%' OR bAuthor LIKE '%${key}%' OR bDescription LIKE '%${key}%' OR bTag LIKE '%${key}%' OR bPublisher LIKE '%${key}%' LIMIT #{p}, 18
     </select>
 
     <select id="getTotNumByKey" resultType="Integer">
-        SELECT COUNT(*) FROM books
-        WHERE bName LIKE %#{key}% OR bAuthor LIKE %#{key}% OR
-                bDescription LIKE %#{key}% OR bTag LIKE %#{key}% OR
-                bPublisher LIKE %#{key}%
-        AS total
+        SELECT COUNT(*) AS Total FROM books
+        WHERE bName LIKE '%${key}%' OR bAuthor LIKE '%${key}%' OR
+                bDescription LIKE '%${key}%' OR bTag LIKE '%${key}%' OR
+                bPublisher LIKE '%${key}%'
+
     </select>
 
     <select id="searchByTags" resultType="com.xgy.bookmall.entity.Book">
-        SELECT * FROM books WHERE bTag IN (#{tags}) LIMIT * 18}, 18
+        SELECT * FROM books WHERE bTag IN (${tags}) LIMIT * 18}, 18
     </select>
 
     <select id="getTotNumByTags" resultType="Integer">
-        SELECT COUNT(*) FROM books WHERE bTag IN (#{tags}) AS total
+        SELECT COUNT(*) FROM books WHERE bTag IN (${tags}) AS total
     </select>
 
 </mapper>
