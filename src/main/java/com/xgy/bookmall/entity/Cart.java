@@ -17,4 +17,20 @@ public class Cart {
         this.bNum = bNum;
         this.status = status;
     }
+
+    public int getBNum() {
+        return bNum;
+    }
+
+    public int getUId() {
+        return uId;
+    }
+
+    public int getBId() {
+        return bId;
+    }
+
+    public int getStatus() {
+        return status;
+    }
 }

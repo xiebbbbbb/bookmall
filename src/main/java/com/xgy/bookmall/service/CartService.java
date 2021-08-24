@@ -24,7 +24,7 @@ public interface CartService {
     int changeStatusByUIdAndBId(@Param("uId") int uId, @Param("bId") int bId, @Param(("status")) int status);
 
     // 联表查询
-    List<Cart> selectBetween(@Param("Cart") Cart cart, @Param("Book") Book book);
+    List<Cart> selectBetweenTable(@Param("Cart") Cart cart, @Param("Book") Book book);
 
     // 联表计算合计金额
     int countSum(@Param("Cart") Cart cart, @Param("Book") Book book, @Param("uId") int uId);
