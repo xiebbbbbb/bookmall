@@ -40,13 +40,39 @@ public class BookController {
 
     @GetMapping("/showDetail")
     @ResponseBody
-    @CrossOrigin
     public JSONObject showDetail(@RequestParam("bId") int bId){
         JSONObject res = new JSONObject();
         Book book = bookService.showDetail(bId);
         String jStr = JSONArray.toJSON(book).toString();
         System.out.println("jStr: " + jStr);
         res.put("bookInfo", jStr);
+
+        return res;
+    }
+
+    @GetMapping("/searchByKey")
+    @ResponseBody
+    public JSONObject searchByKey(@RequestParam("p") int p, @RequestParam("key") String key){
+        System.out.println("key: " + key);
+        JSONObject res = new JSONObject();
+        List<Book> booksList = bookService.searchByKey(p, "'%" + key + "%'");
+        String jStr = JSON.toJSONString(booksList);
+        res.put("booksList", jStr);
+        int total = bookService.getTotNumByKey(key);
+        res.put("total", total);
+
+        return res;
+    }
+
+    @GetMapping("/searchByTags")
+    @ResponseBody
+    public JSONObject searchByTags(@RequestParam("p") int p, @RequestParam("tags") String tags){
+        JSONObject res = new JSONObject();
+        List<Book> booksList = bookService.searchByKey(p, tags);
+        String jStr = JSON.toJSONString(booksList);
+        res.put("booksList", jStr);
+        int total = bookService.getTotNumByTags(tags);
+        res.put("total", total);
 
         return res;
     }

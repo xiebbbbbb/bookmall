@@ -33,4 +33,19 @@ public class BookServiceImpl implements BookService {
     public List<Book> searchByKey(int p, String key) {
         return bookMapper.searchByKey(p, key);
     }
+
+    @Override
+    public int getTotNumByKey(String key) {
+        return bookMapper.getTotNumByKey(key);
+    }
+
+    @Override
+    public List<Book> searchByTags(int p, String tags) {
+        return bookMapper.searchByTags(p, tags);
+    }
+
+    @Override
+    public int getTotNumByTags(String tags) {
+        return bookMapper.getTotNumByTags(tags);
+    }
 }

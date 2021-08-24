@@ -13,4 +13,7 @@ public interface BookMapper {
     int getTotNum();
     Book showDetail(@Param("bId") int bId);
     List<Book> searchByKey(@Param("p") int p, @Param("key") String key);
+    int getTotNumByKey(String key);
+    List<Book> searchByTags(@Param("p") int p, @Param("tags") String tags);
+    int getTotNumByTags(String tags);
 }

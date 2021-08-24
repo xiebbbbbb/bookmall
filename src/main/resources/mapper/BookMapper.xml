@@ -8,7 +8,7 @@
     </select>
 
     <select id="getTotNum" resultType="Integer">
-        SELECT COUNT(*) AS total FROM books
+        SELECT COUNT(*) FROM books AS total
     </select>
 
     <select id="showDetail" resultType="com.xgy.bookmall.entity.Book">
@@ -17,10 +17,28 @@
 
     <select id="searchByKey" resultType="com.xgy.bookmall.entity.Book">
         SELECT * FROM books
-        WHERE bName LIKE %#{key}% OR bAuthor LIKE %#{key}% OR
-        bDescription LIKE %#{key}% OR bTag LIKE %#{key}% OR
-        bPublisher LIKE %#{key}%
+        WHERE bName LIKE #{key}
+            OR bAuthor LIKE #{key}
+            OR bDescription LIKE #{key}
+            OR bTag LIKE #{key}
+            OR bPublisher LIKE #{key}
         LIMIT ${(p - 1) * 18}, 18
+    </select>
+
+    <select id="getTotNumByKey" resultType="Integer">
+        SELECT COUNT(*) FROM books
+        WHERE bName LIKE %#{key}% OR bAuthor LIKE %#{key}% OR
+                bDescription LIKE %#{key}% OR bTag LIKE %#{key}% OR
+                bPublisher LIKE %#{key}%
+        AS total
+    </select>
+
+    <select id="searchByTags" resultType="com.xgy.bookmall.entity.Book">
+        SELECT * FROM books WHERE bTag IN (#{tags}) LIMIT * 18}, 18
+    </select>
+
+    <select id="getTotNumByTags" resultType="Integer">
+        SELECT COUNT(*) FROM books WHERE bTag IN (#{tags}) AS total
     </select>
 
 </mapper>
