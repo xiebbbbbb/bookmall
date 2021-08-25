@@ -19,10 +19,11 @@
                     <!-- 顶部悬停栏 -->
                 </ul>
             </div>
+            <br>
+            <h4>&nbsp;&nbsp;购物车</h4>
         </nav>
-        <br>
-        <h4>&nbsp;&nbsp;购物车</h4>
         <div id="cart" class="container border  bg-light">
+
             <!--放购物车内容-->
         </div>
     </div>
@@ -113,7 +114,6 @@
 
                     for(let i = 0; i < booksList.length; i++){
                         let bchecked = booksList[i].status ? "checked" : "";
-                        //JSONObject booktemp = booksList[i].toJSON();
                         let bName = booksList[i].bName;
                         let bNum = booksList[i].bNum;
                         let bPrice = booksList[i].bPrice;
@@ -131,7 +131,7 @@
                             '                    <div  class="container">\n' +
                             '                        <div class="row">\n' +
                             '                            <div class="col-sm-3">\n' +
-                            '                                <img src = /resources/static/img' + booksList[i].bUri + '"./img" class="cartimg" onclick="watchDetail('+booksList[i].bId+')" alt="书本图片">\n' +
+                            '                                <img src = "./img/' + booksList[i].bUri + '" class="cartimg" onclick="watchDetail('+booksList[i].bId+')" alt="书本图片">\n' +
                             '                            </div>\n' +
                             '                            <div class="col-sm-9">\n' +
                             '                                <a href="#" class="text-dark text-decoration-none" onclick="watchDetail('+booksList[i].bId+')">&nbsp;&nbsp;' + bName +'</a>\n' +
@@ -150,7 +150,7 @@
                             '                <div class="col-sm-3 text-center">\n' +
                             '                    <div class="text-center  _middle">\n' +
                             '                        <a  class="btn btn-light changenumbtn" onclick="deleteOneBook('+bId+')">－</a>\n' +
-                            '                        <input type="text" id="bookNum_'+bId+'" value="'+bNum+'" class="smallinput">\n' +
+                            '                        <input type="text" id="bookNum_'+bId+'" value="'+bNum+'" class="smallinput"  readonly="readonly">\n' +
                             '                        <a  class="btn btn-light changenumbtn" onclick="addOneBook('+bId+')">＋</a>\n' +
                             '                    </div>\n' +
                             '                </div>\n' +
@@ -162,6 +162,7 @@
                             '                </div>\n' +
                             '            </div>'
                     }
+
                     let cartSum = getSum();
                     cartBooks += '<div class="row border"  style="line-height: 3.5">\n' +
                         '                <div class="col-sm-1">\n' +
@@ -247,11 +248,14 @@
                 else{
                     if($(this).is(':checked')){
                         let bid =  this.name;
+                        let deleteAnyHow = 1;
                         $.post('/cart/deleteBook',
                             {
                                 bId: bid,
+                                deleteAnyHow: deleteAnyHow,
                             },
                             function(result){
+                                console.log(typeof deleteAnyHow);
                                 switch (result.code) {
                                     case 201:
                                         console.log('uId should not be empty');
@@ -302,7 +306,7 @@
             let bp = "#bPrice_" + bookId;
             let bps = "#bPriceSum_" + bookId;
 
-            $.post('/cart/addOneBook',
+            $.post('/cart/addBook',
                 {
                     bId: bookId
                 },
@@ -327,11 +331,14 @@
             let num = "#bookNum_"+bookId;
             let bp = "#bPrice_" + bookId;
             let bps = "#bPriceSum_" + bookId;
-            $.post('/cart/minusOneBook',
+            let deleteAnyHow = 0;
+            $.post('/cart/deleteBook',
                 {
-                    bId: bookId
+                    bId: bookId,
+                    deleteAnyHow: deleteAnyHow,
                 },
                 function (data) {
+
                     switch (data.code) {
                         case 201:console.log("uId 为空");break;
                         case 202:console.log("bId 为空");break;
@@ -353,18 +360,11 @@
         }
 
         function getSum() {
-
                 $.post('/cart/calcTotalPrice',
                     {},  (data) => {
-                        if(data.totalPrice[0].totalPrice === null){
-                            $('#cartSum').text("0");
-                        }
-                        else{
-                            $('#cartSum').text(data.totalPrice[0].totalPrice)
-                        }
+                        $('#cartSum').text(data.totalPrice)
                     }
                 )
-
         }
 
         function jiesuan() {
