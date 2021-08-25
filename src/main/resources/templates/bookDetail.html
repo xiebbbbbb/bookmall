@@ -74,7 +74,7 @@
         function loginOut() {
             $.post('/user/userLogout',{},function (data) {
                 if(data.code === 900){
-                    window.location.href = "http://localhost:8080/index.html";
+                    window.location.href = "http://localhost:8080/index";
                 }
             })
         }

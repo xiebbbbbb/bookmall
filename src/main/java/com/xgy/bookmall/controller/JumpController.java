@@ -1,21 +1,31 @@
 package com.xgy.bookmall.controller;
 
-import ch.qos.logback.core.net.SyslogOutputStream;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
 @Controller
 public class JumpController {
+
+    public boolean drag = true;
+
+    @Autowired
+    StringRedisTemplate stringRedisTemplate;
 
     @RequestMapping("/bookDetail")
     public String bookDetail() {
         return "bookDetail";
     }
 
+    //往redis中设置库存
     @RequestMapping("/secKill")
     public String secKill() {
+        if(drag) {
+            //从Redis里查找剩余库存
+            stringRedisTemplate.opsForValue().set("stock", 1 + "");
+            drag = false;
+        }
         return "secKill";
     }
 
@@ -27,6 +37,11 @@ public class JumpController {
     @RequestMapping("/confirmOrder")
     public String confirmOrder() {
         return "confirmOrder";
+    }
+
+    @RequestMapping("/confirmSeckillOrder")
+    public String confirmSeckillOrder() {
+        return "confirmSeckillOrder";
     }
 
     @RequestMapping("/login")

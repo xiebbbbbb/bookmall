@@ -2,7 +2,6 @@ package com.xgy.bookmall.controller;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.xgy.bookmall.entity.Book;
 import com.xgy.bookmall.entity.BookDetail;
 import com.xgy.bookmall.entity.Order;
 import com.xgy.bookmall.entity.OrderBook;
@@ -47,41 +46,31 @@ public class OrderController {
     //秒杀
     @GetMapping("/secKill")
     @ResponseBody
-    public JSONObject secKill(@RequestParam("bId") int bId ,
-                              @RequestParam("oTotalPrice") float oTotalPrice,
-                              @RequestParam("oAddress") String oAddress,
-                              @RequestParam("bNum") int bNum,
-                              HttpSession httpSession) throws InterruptedException{
+    public JSONObject secKill(@RequestParam("bId") int bId) throws InterruptedException{
         JSONObject ret = new JSONObject();
+        //将图书bId作为锁的key
         String lockKey = bId + "";
-        Object uIdObj = httpSession.getAttribute("uId");
-        String uIdStr = uIdObj.toString();
-        int uId = Integer.parseInt(uIdStr);
+        //上锁
         RLock redissonLock = redisson.getLock(lockKey);
         try{
+            //9s为单位
             redissonLock.lock(9, TimeUnit.SECONDS);
             //从Redis里查找剩余库存
             int stock = Integer.parseInt(stringRedisTemplate.opsForValue().get("stock"));
+            System.out.println("stock：" + stock);
             if(stock > 0){
                 int realStock = stock - 1;
                 //存回Redis里
                 stringRedisTemplate.opsForValue().set("stock", realStock + "");
                 System.out.println("抢到了，剩余库存：" + realStock);
                 //code666 为抢到
-                int res2 = 0;
-                int res1 = orderService.insert(new Order(0 , uId , oTotalPrice , oAddress , "进行中"));
-                int oId = orderService.getoId();
-                System.out.println("oId:" + oId);
-                res2 = orderBookService.insert(new OrderBook(oId, bId, bNum) );
-                if(res1 !=0 && res2 != 0) {
-                    ret.put("code" , 666);
-                }else {
-                    ret.put("code" , 777);
-                }
+                ret.put("code" , 666);
+                ret.put("msg" , "抢到了，剩余库存：" + realStock);
             }else {
                 System.out.println("没有抢到，库存不足");
                 //code700 为抢不到
                 ret.put("code" , 700);
+                ret.put("msg" , "没有抢到，库存不足");
             }
         }finally {
             redissonLock.unlock();

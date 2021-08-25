@@ -28,7 +28,8 @@
             showtime();
         });
 
-        function showtime(t = 300){
+        // function showtime(t = 300){
+        function showtime(t = 5){
             for(i=1;i<=t;i++) {
                 window.setTimeout("update_p(" + i + ","+t+")", i * 1000);
             }
@@ -98,34 +99,24 @@
         function loginOut() {
             $.post('/user/userLogout',{},function (data) {
                 if(data.code === 900){
-                    window.location.href = "http://localhost:8080/index.html";
+                    window.location.href = "http://localhost:8080/index";
                 }
             })
         }
 
         function addOrder(bookId) {
-            $.post('/confirmOrder',
+            $.get('/order/secKill',
                 {
                     bId: bookId
                 },
                 function(result){
-                    // console.log("123");
-                    // switch (result.code) {
-                    //     case 201:
-                    //         console.log('uId is null');
-                    //         break;
-                    //     case 202:
-                    //         console.log('bId is null');
-                    //         break;
-                    //     case 100:
-                    //         console.log('成功，加入一本书到用户的购物车');
-                    //         alert("加入成功")
-                    //         break;
-                    //     case 101:
-                    //         console.log('成功，图书已存在，数量+1');
-                    //         alert("图书已存在，数量+1")
-                    //         break;
-                    // }
+                    if (result.code == 666) {
+                        alert("恭喜您！抢到了")
+                        window.location.href = "http://localhost:8080/confirmSeckillOrder";
+                    } else {
+                        alert("很可惜！商品被抢完了！");
+
+                    }
                 }
             );
         }
@@ -149,7 +140,7 @@
                         '        <!--出版社-->\n' +
                         '        <div>出版社：<span id="bPublisher">'+book.bPublisher+'</span></div>\n' +
                         '        <!--价格-->\n' +
-                        '        <div>价格：<span class="text-danger">￥</span><span id="bPrice" class="text-danger">'+book.bPrice / 10+'</span></div>\n' +
+                        '        <div>价格：<span class="text-danger">￥</span><span id="bPrice" class="text-danger">'+ (book.bPrice / 10).toFixed(2)+'</span></div>\n' +
                         '        <!--加入购物车-->\n' +
                         '        <div class=""><input id = "qgButton" class="btn btn-danger" type="button" onclick="addOrder('+boo+')" value="抢购"' +
                         ' disabled = "true"></div>\n' +
