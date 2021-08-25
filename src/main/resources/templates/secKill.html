@@ -42,9 +42,13 @@
             if(num == t)
             {
                 document.getElementById("qgButton").disabled="";
+                $('#beforeminute').text(" 可 以 开 始 抢 购 了 ！");
+                $('#minute_').text("↓");
+                $('#beforesecond').text("");
+                $('#second_').text("↓");
+                $('#aftersecond').text("");
                 //document.getElementById("time").innerHTML = "可以开始抢购了！";
-                $('#time').text("可以开始抢购了！");
-
+                //$('#time').text("可以开始抢购了！");
             }
             else {
                 //document.getElementById("time").innerHTML = "距离抢购还有" + leftM + "分" + leftS + "秒";
@@ -56,7 +60,6 @@
                 $('#aftersecond').text(" 秒 ");
             }
         }
-
 
         function isLogin() {
             $.post('/user/isLogin',
