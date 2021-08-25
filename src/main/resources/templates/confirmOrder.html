@@ -88,6 +88,9 @@
                             '                    </div>\n' +
                             '                </li>\n' +
                             '                <li class="nav-item">\n' +
+                            '                    <a class="nav-link text-muted" href="/secKill">抢购</a>\n' +
+                            '                </li>' +
+                            '                <li class="nav-item">\n' +
                             '                    <a class="nav-link text-muted" href="#">联系我们</a>\n' +
                             '                </li>';
 
@@ -258,22 +261,43 @@
         }
 
         function submitOrder() {
-            let oTP = $("#corderSum").text()*1;
-            let oA = $("#Receiver_name").text() + "," +
+            $.ajax({
+            method: 'POST',
+            url: '/cart/getUserCart',
+            success: function (data) {
+                let booksList = data.booksList;
+                let oTP = $("#corderSum").text() * 1;
+                let oA = $("#Receiver_name").text() + "," +
                     $("#Receiver_tel").text() + "," +
                     $("#Receiver_addr_1").text() + "," +
                     $("#Receiver_addr_2").text();
-            $.post('/order/createOrder',
-                {
-                    oTotalPrice: oTP,
-                    oAddress: oA,
-                },
-                 function (data) {
-                     if(data.code === 701){
-                         console.log(data.msg);
-                         window.location.href = "http://localhost:8080/myOrder";
-                     }
-                 })
+                let bIdListA = new Array();
+                let bNumListA = new Array();
+                for(let i = 0; i < booksList.length; i++){
+                    if(booksList[i].status === 1) {
+                        bIdListA.push(booksList[i].bId);
+                        bNumListA.push(booksList[i].bNum);
+                    }
+                }
+                let bIdList = bIdListA.toString();
+                let bNumList = bNumListA.toString();
+                console.log("bIdList:" + bIdList);
+                console.log("bNumList:" + bNumList);
+                $.post('/order/createOrder',
+                    {
+                        oTotalPrice: oTP,
+                        oAddress: oA,
+                        bIdList: bIdList,
+                        bNumList: bNumList,
+                    },
+                    function (data) {
+                        if (data.code === 701) {
+                            console.log(data.msg);
+                            window.location.href = "http://localhost:8080/myOrder";
+                        }
+                    })
+                }
+            })
         }
 
         function getSum() {

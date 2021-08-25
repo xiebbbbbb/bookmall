@@ -23,6 +23,9 @@ public interface CartMapper {
     // 删除图书
     void deleteByUIdAndBId(@Param("uId") int uId, @Param("bId") int bId);
 
+    //删除选中的图书（用于创建订单时清空购物车)
+    void deleteStatus();
+
     // 修改图书状态
     void changeStatusByUIdAndBId(@Param("uId") int uId, @Param("bId") int bId, @Param(("status")) int status);
 

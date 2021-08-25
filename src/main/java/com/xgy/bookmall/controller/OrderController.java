@@ -7,6 +7,7 @@ import com.xgy.bookmall.entity.BookDetail;
 import com.xgy.bookmall.entity.Order;
 import com.xgy.bookmall.entity.OrderBook;
 import com.xgy.bookmall.service.BookService;
+import com.xgy.bookmall.service.CartService;
 import com.xgy.bookmall.service.OrderBookService;
 import com.xgy.bookmall.service.OrderService;
 import org.redisson.Redisson;
@@ -39,6 +40,9 @@ public class OrderController {
 
     @Autowired
     BookService bookService;
+
+    @Autowired
+    CartService cartService;
 
     //秒杀
     @GetMapping("/secKill")
@@ -166,18 +170,19 @@ public class OrderController {
         {
             res2 = orderBookService.insert(new OrderBook(oId , Integer.parseInt(bIdList2.get(i)) , Integer.parseInt(bNumList2.get(i)) ) );
         }
+        cartService.deleteStatus();
         if(res1 == 0 && res2 == 0){
             ret.put("code", 405);
             ret.put("msg" , "订单不存在");
         }
         else {
-            ret.put("code", 600);
+            ret.put("code", 701);
             ret.put("msg" , "创建订单成功");
         }
         return ret;
     }
 
-    //返回图书信息，缺少乐爷的图书模块
+    //返回图书信息
     @GetMapping("/findOne")
     @ResponseBody
     public JSONObject findOne(@RequestParam("oId") int oId){

@@ -37,6 +37,11 @@ public class CartServiceImpl implements CartService {
     }
 
     @Override
+    public void deleteStatus() {
+        cartMapper.deleteStatus();
+    }
+
+    @Override
     public void changeStatusByUIdAndBId(int uId, int bId, int status) {
         cartMapper.changeStatusByUIdAndBId(uId, bId, status);
     }

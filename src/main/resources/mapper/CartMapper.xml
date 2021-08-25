@@ -25,6 +25,10 @@
         delete from cart WHERE uId = #{uId} AND bId = #{bId}
     </delete>
 
+    <delete id="deleteStatus">
+        delete from cart WHERE status = 1;
+    </delete>
+
     <update id="changeStatusByUIdAndBId">
         update cart SET status = #{status} WHERE uId = #{uId} AND bId = #{bId}
     </update>
