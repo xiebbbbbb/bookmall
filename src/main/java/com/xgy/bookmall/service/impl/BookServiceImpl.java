@@ -40,22 +40,23 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public List<Book> searchByTags(int p, List<String> tags) {
-        return bookMapper.searchByTags(p, tags);
+    public List<Book> searchByTags(int p, List<String> tagsInfo) {
+        return bookMapper.searchByTags(p, tagsInfo);
     }
 
     @Override
-    public int getTotNumByTags(List<String> tags) {
-        return bookMapper.getTotNumByTags(tags);
+    public int getTotNumByTags(List<String> tagsInfo) {
+        return bookMapper.getTotNumByTags(tagsInfo);
     }
 
-//    @Override
-//    public List<Book> searchByTags(int p, String tags) {
-//        return bookMapper.searchByTags(p, tags);
-//    }
-//
-//    @Override
-//    public int getTotNumByTags(String tags) {
-//        return bookMapper.getTotNumByTags(tags);
-//    }
+    @Override
+    public List<Book> searchByTagsAndKey(int p, List<String> tagsInfo, String key) {
+        return bookMapper.searchByTagsAndKey(p, tagsInfo, key);
+    }
+
+    @Override
+    public int getTotNumByTagsAndKey(List<String> tagsInfo, String key) {
+        return bookMapper.getTotNumByTagsAndKey(tagsInfo, key);
+    }
+
 }

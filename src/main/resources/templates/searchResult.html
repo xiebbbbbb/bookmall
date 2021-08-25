@@ -136,9 +136,6 @@
                 });
             }
             else if(data.keyword == null && data.labels != null){
-                console.log("tags: " + JSON.stringify(data.labels));
-                // for(let i = 0; i < data.labels.length; i++)
-                //     data.labels[i] = "'" + data.labels[i] + "'";
                 $.ajax({
                     method: 'GET',
                     data: {
@@ -168,10 +165,11 @@
                     method: 'GET',
                     data: {
                         'p': pageNo,
-                        'key': data.keyword,
-                        'tagList': data.labels.join()
+                        //'tags': data.labels.join(),
+                        'tags': JSON.stringify(data.labels),
+                        'key': data.keyword
                     },
-                    url: '/book/searchByTagsAndKeys',
+                    url: '/book/searchByTagsAndKey',
                     success: function (data){
                         fillPanel(data, pageNo);
                     }
@@ -326,7 +324,7 @@
     <div class="row mt-5 mb-5 bg-up">
         <div class="col-lg-3 d-flex justify-content-end align-content-center">
             <div class="libraryBtnBox">
-                <a id="libraryBtn" href="searchResult.html" class="library_icon"><i class="fa fa-book icon_color"></i></a>
+                <a id="libraryBtn" href="/searchResult" class="library_icon"><i class="fa fa-book icon_color"></i></a>
                 <input class="libraryText" type="text" value="图书馆" disabled="disabled">
             </div>
         </div>

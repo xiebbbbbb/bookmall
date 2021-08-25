@@ -32,27 +32,40 @@
                 bPublisher LIKE #{key}
     </select>
 
-    <!--select id="searchByTags" resultType="com.xgy.bookmall.entity.Book" parameterType="String">
-        SELECT * FROM books WHERE bTag IN #{tags} LIMIT ${(p - 1) * 18}, 18
-    </select-->
-
     <select id="searchByTags" resultType="com.xgy.bookmall.entity.Book">
         SELECT * FROM books WHERE bTag IN
-        <foreach collection="List" item="item" index="index" open="(" separator="," close=")">
+        <foreach collection="tagsInfo" item="item" index="index" open="(" separator="," close=")">
         #{item}
         </foreach>
         LIMIT ${(p - 1) * 18}, 18
     </select>
 
-    <!--select id="getTotNumByTags" resultType="Integer" parameterType="String">
-        SELECT COUNT(*) AS total FROM books WHERE bTag IN #{tags}
-    </select-->
-
     <select id="getTotNumByTags" resultType="Integer">
         SELECT COUNT(*) AS total FROM books WHERE bTag IN
-        <foreach collection="List" item="item" index="index" open="(" separator="," close=")">
+        <foreach collection="tagsInfo" item="item" index="index" open="(" separator="," close=")">
         #{item}
         </foreach>
+    </select>
+
+    <select id="searchByTagsAndKey" resultType="com.xgy.bookmall.entity.Book">
+        SELECT * FROM books WHERE bTag IN
+        <foreach collection="tagsInfo" item="item" index="index" open="(" separator="," close=")">
+        #{item}
+        </foreach>
+        AND (bName LIKE #{key} OR bAuthor LIKE #{key} OR
+            bDescription LIKE #{key} OR bTag LIKE #{key} OR
+            bPublisher LIKE #{key})
+        LIMIT ${(p - 1) * 18}, 18
+    </select>
+
+    <select id="getTotNumByTagsAndKey" resultType="Integer">
+        SELECT COUNT(*) AS total FROM books WHERE bTag IN
+        <foreach collection="tagsInfo" item="item" index="index" open="(" separator="," close=")">
+        #{item}
+        </foreach>
+        AND (bName LIKE #{key} OR bAuthor LIKE #{key} OR
+        bDescription LIKE #{key} OR bTag LIKE #{key} OR
+        bPublisher LIKE #{key})
     </select>
 
 </mapper>

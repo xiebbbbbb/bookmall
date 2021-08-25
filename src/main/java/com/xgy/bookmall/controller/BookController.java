@@ -5,6 +5,7 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.xgy.bookmall.entity.Book;
 import com.xgy.bookmall.service.BookService;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -44,7 +45,6 @@ public class BookController {
         JSONObject res = new JSONObject();
         Book book = bookService.showDetail(bId);
         String jStr = JSONArray.toJSON(book).toString();
-        System.out.println("jStr: " + jStr);
         res.put("bookInfo", jStr);
 
         return res;
@@ -53,7 +53,6 @@ public class BookController {
     @GetMapping("/searchByKey")
     @ResponseBody
     public JSONObject searchByKey(@RequestParam("p") int p, @RequestParam("key") String key){
-        System.out.println("key: " + key);
         JSONObject res = new JSONObject();
         List<Book> booksList = bookService.searchByKey(p, "%" + key + "%");
         String jStr = JSON.toJSONString(booksList);
@@ -68,9 +67,7 @@ public class BookController {
     @ResponseBody
     public JSONObject searchByTags(@RequestParam("p") int p, @RequestParam("tags") String tags){
         JSONObject res = new JSONObject();
-        System.out.println("tags: " + tags);
         List<String> tagsInfo = JSON.parseArray(tags, String.class);
-        System.out.println(tagsInfo);
         List<Book> booksList = bookService.searchByTags(p, tagsInfo);
         String jStr = JSON.toJSONString(booksList);
         res.put("booksList", jStr);
@@ -79,4 +76,19 @@ public class BookController {
 
         return res;
     }
+
+    @GetMapping("/searchByTagsAndKey")
+    @ResponseBody
+    public JSONObject searchByTagsAndKey(@Param("p") int p, @Param("tags") String tags, @Param("key") String key){
+        JSONObject res = new JSONObject();
+        List<String> tagsInfo = JSON.parseArray(tags, String.class);
+        List<Book> booksList = bookService.searchByTagsAndKey(p, tagsInfo, "%"+ key +"%");
+        String jStr = JSON.toJSONString(booksList);
+        res.put("booksList", jStr);
+        int total = bookService.getTotNumByTagsAndKey(tagsInfo, key);
+        res.put("total", total);
+
+        return res;
+    }
+
 }
