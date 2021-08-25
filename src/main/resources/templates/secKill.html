@@ -42,10 +42,18 @@
             if(num == t)
             {
                 document.getElementById("qgButton").disabled="";
-                document.getElementById("time").innerHTML = "可以开始抢购了！";
+                //document.getElementById("time").innerHTML = "可以开始抢购了！";
+                $('#time').text("可以开始抢购了！");
+
             }
             else {
-                document.getElementById("time").innerHTML = "距离抢购还有" + leftM + "分" + leftS + "秒";
+                //document.getElementById("time").innerHTML = "距离抢购还有" + leftM + "分" + leftS + "秒";
+                //let text = "距 离 抢 购 还 有 " + leftM + " 分 " + leftS + " 秒 ";
+                $('#beforeminute').text(" 距 离 抢 购 还 有 ");
+                $('#minute_').text(PrefixInteger(leftM, 2));
+                $('#beforesecond').text(" 分 ");
+                $('#second_').text(PrefixInteger(leftS, 2));
+                $('#aftersecond').text(" 秒 ");
             }
         }
 
@@ -148,6 +156,11 @@
                     $("#Detail").html(content);
                 })
         }
+
+        function PrefixInteger(num, n) {
+            return (Array(n).join(0) + num).slice(-n);
+        }
+
     </script>
 </head>
 <body>
@@ -182,8 +195,20 @@
         </div>
     </nav>
     <!-- 图书馆按钮 + 搜索框 + 购物车按钮 -->
-    <div class="row mt-5 mb-5 bg-up">
-        <span id="time"></span>
+    <div class="row mt-5 mb-5 bg-up text-center">
+        <div class="col-3 text-center"></div>
+        <div class="col-8 text-center">
+            <div class="row">
+                <div class="btn-group" role="group" aria-label="Basic example">
+                    <div id = "beforeminute" class="btn btn-light text-secondary text-center" style="font-size:26px; font-family: Microsoft YaHei;">距 离 抢 购 还 有 </div>
+                    <div id = "minute_" class="btn btn-light text-danger font-weight-bold" style="font-size:26px; font-family: Microsoft YaHei;">05</div>
+                    <div id = "beforesecond" class="btn btn-light text-secondary " style="font-size:26px; font-family: Microsoft YaHei;">分</div>
+                    <div id = "second_" class="btn btn-light text-danger font-weight-bold" style="font-size:26px; font-family: Microsoft YaHei;">00</div>
+                    <div id = "aftersecond" class="btn btn-light text-secondary " style="font-size:26px; font-family: Microsoft YaHei;">秒</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-1 text-center"></div>
     </div>
     <div id="Detail" class="container container-lg d-flex flex-row w-75 mt-2 border pt-1 pb-1 rounded shadow">
     </div>
