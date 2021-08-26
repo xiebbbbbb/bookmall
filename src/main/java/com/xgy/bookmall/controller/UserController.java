@@ -56,6 +56,7 @@ public class UserController {
                                 @RequestParam("uPwd") String uPwd,
                                 HttpSession httpSession) {
         JSONObject ret = new JSONObject();
+        System.out.println("xgy:" + uName + uPwd);
         if (isEmpty(uName)) {
             ret.put("code", 401);
             ret.put("msg", "uName required");

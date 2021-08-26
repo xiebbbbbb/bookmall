@@ -75,7 +75,6 @@ public class OrderController {
         }finally {
             redissonLock.unlock();
         }
-        System.out.println("secKill" + ret);
         return ret;
     }
 

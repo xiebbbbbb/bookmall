@@ -23,7 +23,7 @@ public class JumpController {
     public String secKill() {
         if(drag) {
             //从Redis里查找剩余库存
-            stringRedisTemplate.opsForValue().set("stock", 1 + "");
+            stringRedisTemplate.opsForValue().set("stock", 10 + "");
             drag = false;
         }
         return "secKill";
